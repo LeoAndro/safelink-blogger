@@ -1,0 +1,1116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3' expr:dir='data:blog.languageDirection' expr:lang='data:blog.locale' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>&lt;!--<head>--&gt;&lt;head&gt;
+<meta charset='utf-8'/>
+<meta content='IE=edge' http-equiv='X-UA-Compatible'/>
+<meta content='width=device-width,minimum-scale=1,initial-scale=1' name='viewport'/>
+<b:if cond='data:view.isHomepage'>
+<title><data:blog.title/></title>
+<b:elseif cond='data:view.isPost or data:view.isPage or data:view.search.label'/>
+<title><data:blog.pageName/> | <data:blog.title/></title>
+<b:elseif cond='data:view.search.query'/>
+<title><data:view.search.resultsMessage/> | <data:blog.title/></title>
+<b:elseif cond='data:view.search and !data:view.search.label and !data:view.search.query'/>
+<title><data:blog.title/></title>
+<b:elseif cond='data:view.isArchive'/>
+<title><data:view.archive.rangeMessage/> | <data:blog.title/></title>
+<b:elseif cond='data:view.isError'/>
+<title>404 | <data:blog.title/></title>
+</b:if>
+
+<script type='text/javascript'>
+var setting = {
+pengecualianstatus : true,
+pengecualian : &quot;google.com,twitter.com,javascript:;,mailto:&quot;,
+hanyauntukstatus : false,
+hanyauntuk : &quot;githubusercontent.com&quot;, //use ::withpath for autolink specific path exampe.com/download/::withpath
+path : &quot;#?o=&quot;
+};    
+</script>
+<script src='https://cdn.statically.io/gh/riedayme/bloggercode/master/js/autoreplacebyfeednew.js' type='text/javascript'/>
+<script src='https://www.blogger.com/feeds/7832428048196270207/posts/default?alt=json-in-script&amp;max-results=13&amp;callback=showurl'/>
+
+<link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' rel='stylesheet'/>
+<link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css' rel='stylesheet'/>
+
+<b:skin version='1.0.0'><![CDATA[
+/**
+* Description: Kodein Simple Framework Blogger.
+* Version: 1.0.0
+* Last update: 2017/12/14
+* Author: Irfaan / programmer.irfaan@gmail.com
+*/
+
+/* ==========================================================================
+VARIABLE DEV
+============================================================================= 
+<Variable name="keycolor" description="Main Color" type="color" default="#FFFFFF" value="#FFFFFF"/>
+
+<Group description="Body" selector="body">
+<Variable name="body.background.color" description="body.background.color" type="color" default="#FFFFFF" value="#FFFFFF"/>
+</Group>
+<Variable name="body.background" description="body.background" type="background" color="$(body.background.color)" default="$(color) none no-repeat fixed center center" value="$(color) none no-repeat fixed center center"/>	
+
+<Group description="text.color" selector="body">
+<Variable name="body.text.color" description="body.text.color" type="color" default="#000" value="#000000"/>
+</Group>
+
+<Group description="link.color" selector="body">
+<Variable name="link.color" description="link.color" type="color" default="#4285f4" value="#4285f4"/>
+<Variable name="link.color.hover" description="link.color.hover" type="color" default="#111" value="#111111"/>
+<Variable name="link.color.visited" description="link.color.visited" type="color" default="#6d1dec" value="#6d1dec"/>
+</Group>
+
+<Group description="primary.color" selector="primary.color">
+<Variable name="primary.color.text" description="primary.color.text" type="color" default="#FFFFFF" value="#FFFFFF"/>
+<Variable name="primary.color" description="primary.color" type="color" default="#03a9f4" value="#03a9f4"/>
+<Variable name="second.color" description="second.color" type="color" default="#0e99d8" value="#0e99d8"/>
+</Group>
+========================================================================== */
+
+/* ==========================================================================
+BLOGGER #LAYOUT
+========================================================================== */
+body#layout #fix{
+display:none;
+}
+body#layout .section{overflow:hidden !important}
+body#layout #HTML3{width:29%;float:left;margin:0}
+body#layout #Blog1{width:40%;float:left;margin: 0 7.5px;}
+body#layout #HTML4{width:29%;float:left;margin:0}
+body#layout #HTML3 .widget-content,body#layout #HTML4 .widget-content{height: 16em;}
+
+/* ==========================================================================
+BLOGGER CSS
+========================================================================== */	
+.widget li{padding:0}
+.widget ul{padding:0;margin:0;line-height:normal}
+.widget-content li{list-style-type:none}
+.separator a {margin:initial!important;}
+.separator a img{margin: 1em;}
+.separator:nth-child(1) a img{margin:initial;margin-bottom:1em}	
+.Navbar {display:none}	
+
+/* ==========================================================================
+CSS RESET
+========================================================================== */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
+
+/* ==========================================================================
+HTML 5
+========================================================================== */
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block;}body{line-height:1;display:block;}*{margin:0;padding:0;}html{display:block;}ol,ul{list-style:none;}blockquote,q{quotes:none;}blockquote:before,blockquote:after,q:before,q:after{background:transparent;}table{border-collapse:collapse;border-spacing:0;}*,*:before, *:after {-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}ins{background:#fff;}
+
+/* ==========================================================================
+FORM CSS
+========================================================================== */
+input[type="text"],input[type="password"],input[type="email"],input[type="url"],input[type="date"],input[type="month"],input[type="time"],input[type="datetime"],input[type="datetime-local"],input[type="week"],input[type="number"],input[type="search"],input[type="tel"],select{background:#fff;border:1px solid rgba(0,0,0,0.12);border-radius:4px;color:rgba(0,0,0,0.8);display:inline-block;padding:4px;vertical-align:middle}
+input[type="color"]{background:#fff;border:1px solid rgba(0,0,0,0.12);border-radius:4px;display:inline-block;vertical-align:middle}
+input:not([type]){-webkit-appearance:none;background-clip:padding-box;border:1px solid rgba(0,0,0,0.12);border-radius:4px;display:inline-block;padding:8px;text-align:left}
+input[type="text"]:focus,input[type="password"]:focus,input[type="email"]:focus,input[type="url"]:focus,input[type="date"]:focus,input[type="month"]:focus,input[type="time"]:focus,input[type="datetime"]:focus,input[type="datetime-local"]:focus,input[type="week"]:focus,input[type="number"]:focus,input[type="search"]:focus,input[type="tel"]:focus,input[type="color"]:focus,select:focus,textarea:focus{border-color:#2196f3}
+input:not([type]):focus{border-color:#2196f3}
+input[type="file"]:focus,input[type="radio"]:focus,input[type="checkbox"]:focus{outline:1px thin rgba(0,0,0,0.12)}
+input[type="text"][disabled],input[type="password"][disabled],input[type="email"][disabled],input[type="url"][disabled],input[type="date"][disabled],input[type="month"][disabled],input[type="time"][disabled],input[type="datetime"][disabled],input[type="datetime-local"][disabled],input[type="week"][disabled],input[type="number"][disabled],input[type="search"][disabled],input[type="tel"][disabled],input[type="color"][disabled],select[disabled],textarea[disabled]{background-color:rgba(0,0,0,0.12);color:rgba(0,0,0,0.54);cursor:not-allowed}
+input:not([type])[disabled]{background-color:rgba(0,0,0,0.12);color:rgba(0,0,0,0.54);cursor:not-allowed}
+input[readonly],select[readonly],textarea[readonly]{border-color:rgba(0,0,0,0.12);color:rgba(0,0,0,0.54)}
+input:focus:invalid,textarea:focus:invalid,select:focus:invalid{border-color:#ea1c0d;color:#f44336}
+input[type="file"]:focus:invalid:focus,input[type="radio"]:focus:invalid:focus,input[type="checkbox"]:focus:invalid:focus{outline-color:#f44336}
+select{-webkit-appearance:menulist-button;border:1px solid rgba(0,0,0,0.12);vertical-align:sub}
+select[multiple]{height:auto}
+label{line-height:2}
+fieldset{border:0;margin:0;padding:8px 0}
+legend{border-bottom:1px solid rgba(0,0,0,0.12);color:rgba(0,0,0,0.8);display:block;margin-bottom:8px;padding:8px 0;width:100%}
+textarea{background:#fff;border:1px solid rgba(0,0,0,0.12);border-radius:4px;display:block;margin-bottom:8px;max-width:100%;padding:8px;vertical-align:middle}
+input[type=submit],input[type=reset],button{background:#2196f3;border:1px solid rgba(0,0,0,0.12);border-radius:4px;color:#fff;cursor:pointer;display:inline-block;margin:0;padding:8px 16px;text-align:center;vertical-align:middle;white-space:nowrap}
+input[type=submit]::-moz-focus-inner,input[type=reset]::-moz-focus-inner,button::-moz-focus-inner{padding:0}
+input[type=submit]:hover,input[type=reset]:hover,button:hover{background:#0c7cd5;border-color:1px solid rgba(0,0,0,0.54)}
+input[type=submit]:active,input[type=reset]:active,button:active{background:#0c7cd5;border-color:1px solid rgba(0,0,0,0.54);box-shadow:inset 0 0 4px 0 rgba(0,0,0,0.2);outline-offset:-2px}
+input[type=submit]:focus,input[type=reset]:focus,button:focus{background:#0c7cd5;border-color:1px solid rgba(0,0,0,0.54);box-shadow:inset 0 0 4px 0 rgba(0,0,0,0.2);outline:0}
+input[type=submit]:disabled,button:disabled{background:rgba(0,0,0,0.12);color:rgba(0,0,0,0.38);cursor:not-allowed}
+
+/* ==========================================================================
+ROOT ELEMENT
+========================================================================== */
+body {
+font-family: Trebuchet, Trebuchet MS, Arial, sans-serif;
+font-weight: 400;
+line-height: 1.625;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+color: $(body.text.color);
+background: $(body.background);
+}
+
+/* ==========================================================================
+HEADING
+========================================================================== */
+h1,h2,h3,h4,h5{display:block;font-weight:700}
+h1{font-size:150%}
+h2{font-size:140%}
+h3{font-size:130%}
+h4{font-size:120%}
+h5{font-size:110%}	
+
+/* ==========================================================================
+LINK
+========================================================================== */
+a:link {
+color:$(link.color);
+text-decoration: none;
+margin: 0;
+-webkit-transition: ease-in-out .2s;
+-moz-transition: ease-in-out .2s;
+-ms-transition: ease-in-out .2s;
+-o-transition: ease-in-out .2s;
+transition: ease-in-out .2s
+}
+a:visited {
+color:$(link.color.visited);
+}
+a:hover {
+color:$(link.color.hover);
+}	
+
+/* ==========================================================================
+TABLE
+========================================================================== */
+table{width:100%}
+table th{color:#4285f4;border:1px solid rgba(0,0,0,0.12);text-align:left;vertical-align:top;font-size:18px}
+table td{border:1px solid rgba(0,0,0,0.12);text-align:left;vertical-align:top}
+table caption{border:none;font-style:italic}
+th{font-weight:700}
+td,th{padding:8px;line-height:1.42857143;vertical-align:top;text-align:left;border:1px solid rgba(0,0,0,0.12)}
+table.striped tr:nth-child(even) >td{background-color:#f2f2f2}
+table.dark tr,table.dark th{background-color:#212529;color:#fff}
+table.dark.striped tr:nth-child(even) > td,table.dark.striped tr > th{background-color:rgba(255,255,255,.05)}
+table.tr-caption-container{width:auto}
+table.tr-caption-container td{padding:8px;background:#fff!important}
+table.tr-caption-container td a{margin:0!important}
+
+
+/* ==========================================================================
+POST LIST
+========================================================================== */
+ol li{display:block;-webkit-margin-before:1em;-webkit-margin-after:1em;-webkit-margin-start:0;-webkit-margin-end:0;-webkit-padding-start:40px;list-style-type:decimal}
+ul{display:block;-webkit-margin-before:1em;-webkit-margin-after:1em;-webkit-margin-start:0;-webkit-margin-end:0;-webkit-padding-start:40px;list-style-type:square}
+.post-body ol li{margin:.5em 0 .5em 2em;list-style-type:decimal}
+.post-body ul{margin:.5em 0 .5em 2em;list-style-type:square}
+
+
+/* ==========================================================================
+PRE CODE
+========================================================================== */	
+code,pre{font-family:Menlo,Monaco,Consolas,"Courier New",monospace;font-size:16px;color:rgba(0,0,0,.8)}
+pre{background:#efefef;margin:16px 0;white-space:pre-wrap;margin:10px 0;padding:10px 15px;border:1px solid #ddd}
+code{line-height:inherit;word-break:break-all;word-wrap:break-word}
+blockquote{border-left:2px solid #2196f3;font-family:Georgia,Times,"Times New Roman",serif;margin:16px 0;padding-left:16px}
+
+/* ==========================================================================
+PARAGRAPH CSS
+========================================================================== */	
+hr{border-top:1px solid rgba(0,0,0,0.12);display:block;margin-bottom:16px;width:100%}
+p{margin:0;margin-bottom:16px}
+small{color:rgba(0,0,0,0.54);vertical-align:bottom}
+figcaption{font-family:Georgia,Times,"Times New Roman",serif}
+u{text-decoration:underline}
+s{text-decoration:line-through}
+sup{font-size:14px;vertical-align:super}
+sub{font-size:14px;vertical-align:sub}
+mark{background:#ffeb3b}
+hr{border-top:1px solid rgba(0,0,0,0.12);display:block;margin-bottom:16px;width:100%}
+img{height:auto;max-width:100%;vertical-align:baseline}
+.post-body {word-wrap: break-word;}
+
+/* ==========================================================================
+CUSTOM CSS
+========================================================================== */	
+.hidden{visibility:hidden;height:0;overflow:hidden;display:none}
+.clear{clear:both}
+.shadow{-webkit-box-shadow:0 1px 1px rgba(0,0,0,.05);box-shadow:0 1px 1px rgba(0,0,0,.05)}
+.margin-0{margin:0}
+.padding-0{padding:0}
+.primary-color{
+background:$(primary.color) !important;
+background-color:$(primary.color) !important;
+}
+.primary-color-border{
+border-color:$(primary.color) !important;
+}
+.primary-color-text{
+color:$(primary.color.text) !important;
+}
+
+]]></b:skin>
+
+<style type='text/css'>
+<b:if cond='data:view.isHomepage'>
+body{
+background: url(https://4.bp.blogspot.com/-Ndtxy9IlA7w/WlmQu_JzBZI/AAAAAAAAAe0/ZrMyPz1Wig0d7WGxDsDfEloMNf9xm1pbQCLcBGAs/s1600/bgz.jpg) no-repeat fixed center top #ffffff;
+background-size:100% 100%;
+}
+#wrapper{max-width:960px;min-width:320px;margin:0 auto;position:relative}h1{font-weight:bold;font-size:48px;letter-spacing:2px;text-align:center;text-transform:uppercase;text-shadow:0 1px 1px rgba(0,0,0,0.25);color:#fff;margin-top:20px}#desc{color:#fff;text-shadow:0 1px 1px rgba(0,0,0,0.25);margin:0 5px 20px 5px;text-align:center;font-size:16px}#text-header{background-color:#f3f3f3;border-bottom:1px solid #e7e7e7;font-size:11px;font-weight:bold;line-height:50px;text-align:center;text-transform:uppercase;position:relative}#text-footer{background-color:#f3f3f3;border-top:1px solid #e7e7e7}.shadow{background:url(&quot;/images/unminify/form-shadow.png&quot;) no-repeat scroll center top rgba(0,0,0,0);bottom:-6px;height:6px;left:0;position:absolute;width:100%;z-index:2}#text-field{overflow:hidden}#text-field .CodeMirror{height:360px;font-size:12px}.text-field-error .CodeMirror{background-color:#fffee6!important;transition:background .3s ease 0s}#form{background-color:#fff;box-shadow:0 0 5px #777}#footer{color:#fff;text-align:center;margin:30px 0 15px 0;font-size:13px}#footer a{color:#fff;text-decoration:underline}.line{background-color:#e9e9e9;width:100%;height:1px;margin-top:15px}#buttons{width:300px;height:54px;margin:0 auto;padding:10px 0}#start-button,#clear-button{margin:0 10px;float:left;height:34px}.action-button{background-color:#282828;border:medium none;color:#fff;cursor:pointer;font-weight:600;font-size:13px;outline:medium none;text-transform:uppercase;text-align:center;transition:background .3s ease .1s;width:129px;line-height:34px}.action-button:hover{background-color:#00aeef}#main-form{padding:20px 5px}#progress-bar .ui-progressbar-value{margin:0!important}.block{position:relative}.x-pretty-alert{padding-top:20px!important;text-align:center}.pretty-policy p{margin:10px 0}#start-button-progress{width:129px;height:34px;background-color:#00aeef;padding:12px}#start-button-progress img{display:block;width:43px;height:11px;margin:0 auto}#like-it{font-size:20px;font-weight:bold;letter-spacing:1px;text-align:center;color:#414141}#share{width:300px;margin:10px auto 0 auto;text-align:center}#share .pop{margin:0 5px}.share-bw{background:url(https://2.bp.blogspot.com/-5oCCVdNckLo/Wlj_uqiQeYI/AAAAAAAAAeU/gJ28DCQ2PfcZIrassdn-V6bhSHSPOPm_gCLcBGAs/s1600/social-icons.png) no-repeat scroll left top transparent;display:inline-block;width:49px;height:49px;line-height:0;margin:0}.share-bw-facebook{background-position:-1px -1px}.share-bw-facebook:hover{background-position:-1px -51px}.share-bw-twitter{background-position:-50px -1px}.share-bw-twitter:hover{background-position:-50px -51px}.share-bw-googleplus{background-position:-99px -1px}.share-bw-googleplus:hover{background-position:-99px -51px}.share-bw-stumbleupon{background-position:-148px -1px}.share-bw-stumbleupon:hover{background-position:-148px -51px}.share-bw-reddit{background-position:-197px -1px}.share-bw-reddit:hover{background-position:-197px -51px}.share-bw-vkontakte{background-position:-246px -1px}.share-bw-vkontakte:hover{background-position:-246px -51px}@media only screen and (max-width:560px){#logo img{width:100%;height:auto}}#navbottom{margin:20px 0;text-align:center;font-size:1.2em;font-weight:bold}#navbottom a{color:#333}
+#HTML1, #HTML2 {
+text-align: center;
+}
+#HTML1 .content, #HTML2 .content {
+margin: 15px auto 20px auto;
+display: inline-block;
+}
+</b:if>
+<b:if cond='data:view.isSingleItem'>
+.navbar-default{border:none;border-radius:0}
+.navbar-default .navbar-nav&gt;li&gt;a{color:#fff!important;opacity:.8}
+.navbar-default .navbar-nav&gt;li&gt;a:hover,h1.navbar-brand a:hover,h1.navbar-brand:hover,p.navbar-brand a:hover,p.navbar-brand:hover{opacity:1;background-color:#428bca!important;text-decoration:none}
+.navbar-default .navbar-toggle{border-color:#1f66a3!important;background-color:#428bca}
+.navbar-default .navbar-toggle .icon-bar{background-color:#fff!important}
+.navbar-default .navbar-toggle:hover .icon-bar{background-color:#888!important}
+.navbar-default .navbar-collapse,.navbar-default .navbar-form{border-color:#1f66a3!important}
+#b-section-Navbar .widget{margin:7.5px -15px}
+@media (min-width:768px){#b-section-Navbar .widget{margin:0}}
+#timer{margin:auto;width:80px}
+.pietimer{position:relative;font-size:200px;width:1em;height:1em}
+.pietimer &gt; .percent{position:absolute;top:18px;left:5px;width:3.33em;font-size:18px;text-align:center;display:none}
+.pietimer &gt; .slice{position:absolute;width:1em;height:1em;clip:rect(0px,1em,1em,0.5em)}
+.pietimer &gt; .slice.gt50{clip:rect(auto,auto,auto,auto)}
+.pietimer &gt; .slice &gt; .pie{border:0.1em solid #c0c0c0;position:absolute;width:0.8em;/* 1 - (2 * border width) */height:0.8em;/* 1 - (2 * border width) */clip:rect(0em,0.5em,1em,0em);-moz-border-radius:0.5em;-webkit-border-radius:0.5em;border-radius:0.5em}
+.pietimer &gt; .slice &gt; .pie.fill{-moz-transform:rotate(180deg)!important;-webkit-transform:rotate(180deg)!important;-o-transform:rotate(180deg)!important;transform:rotate(180deg)!important}
+.pietimer.fill &gt; .percent{display:none}
+.pietimer.fill &gt; .slice &gt; .pie{border:transparent;background-color:#c0c0c0;width:1em;height:1em}
+#sidebarleft,#sidebarright {text-align:center}
+/* ==========================================================================
+ADBLOCK
+========================================================================== */
+.adb{position:fixed;width:100%;height:100%;left:0;top:0;bottom:0;background:rgba(51,51,51,0.7);z-index:10000;text-align:center;color:#fff;}
+.adbs{margin:0 auto;width:auto;position:fixed;z-index:99999;left:50%;top:50%;transform:translate(-50%, -50%);padding:20px 30px 30px;background:rgba(51,51,51,0.5);-webkit-border-radius:12px;-moz-border-radius:12px;border-radius:12px;}
+</b:if>
+<b:if cond='data:view.isError'>
+#header, #outer-wrapper, #post-wrapper, #sidebar-wrapper, #content-wrapper, #aside-wrapper, #footer-wrapper, #nav-menu, #wrapper, .header-wrapper, .backtotop.tutor, .backtotop{display:none;}
+body,html{overflow:hidden;margin:0;padding:0;width:100%;min-height:100vh;}
+body{background:#292b2c;color:#fff;}
+.error-page-box{margin:8% auto 0 auto;max-width:768px;min-width:200px;line-height:normal;font-size:16px;backface-visibility:hidden;transition:all .3s;}
+.error-page-box .error-body hr{background:transparent;display:block;border:none;border-bottom:4px solid rgba(255,255,255,.3)}
+.error-page-box .error-body{padding:20px;font-size:110%;color:#fff;border-radius:5px 5px 0 0}
+.error-page-box .error-body h2{text-align: center;font-size: 40px;text-transform: uppercase;}
+.error-page-box .error-body p{display:block;margin:10px 0}
+.error-page-box .error-body ul li{margin:0 0 8px 20px;list-style:initial;list-style-type:square}
+.error-page-box .error-body ul li a{color:#fff;text-decoration:underline}
+.error-page-box .error-body ul li a:hover{color:#aaa;text-decoration:none}
+.error-page-box .error-footer{display:block;margin:auto;font-weight:normal;max-width:768px;min-width:200px;padding:0 20px;text-align:center;}
+.error-page-box .error-footer a,.error-page-box .error-footer a:hover{color:#fff}
+@media screen and (max-width:1024px) {.error-page-box{margin:4% auto 0 auto;}.error-page-box .error-body h2{font-size:40px;}}
+@media screen and (max-width:640px) {.error-page-box .error-body h2{font-size:1.6rem;}}
+</b:if>
+</style>
+
+&lt;!--</head>--&gt;&lt;/head&gt;
+<body itemscope='itemscope' itemtype='http://schema.org/WebPage'>
+<meta content='fullKeyboardControl' itemprop='accessibilityControl'/>
+<meta content='fullMouseControl' itemprop='accessibilityControl'/>
+
+<b:if cond='data:view.isError'>
+<div class='error-page-box'>
+<div class='error-body'>
+<h2>The page could not be found</h2>
+<hr/>
+<p>The page you are looking for might have been removed had its name changed or is temporarily unavailable</p>
+<p>Please try the following :</p>
+<ul>
+<li>If you type the page address in the <strong>Address Bar</strong>, make sure that it is spelled correctly.</li>
+<li>Click <strong>
+<a expr:href='data:blog.homepageUrl' expr:title='data:messages.home'>
+here
+</a>
+</strong> to return to our main page.</li>
+<li>If you were linked to this page, contact the administrator and make them aware of this issue.</li>
+</ul>
+</div>
+<div class='error-footer'>
+&#169; 2017
+<a expr:href='data:blog.homepageUrl' expr:title='data:blog.title'>
+<span expr:title='data:blog.title' itemprop='name'><data:blog.title/></span>
+</a> - <data:messages.poweredByBlogger/>.
+</div>
+</div>
+<b:else/>
+
+<b:if cond='data:view.isHomepage'>
+<div class='container' style='margin-top:5%'>
+<div class='col-md-12 text-center'>
+<b:section id='Judul Di Homepage' maxwidgets='1' showaddelement='no'>
+  <b:widget id='Header1' locked='true' title='AdsCuk (Header)' type='Header' version='2' visible='true'>
+    <b:widget-settings>
+      <b:widget-setting name='displayUrl'/>
+      <b:widget-setting name='displayHeight'>0</b:widget-setting>
+      <b:widget-setting name='sectionWidth'>-1</b:widget-setting>
+      <b:widget-setting name='useImage'>false</b:widget-setting>
+      <b:widget-setting name='shrinkToFit'>false</b:widget-setting>
+      <b:widget-setting name='imagePlacement'>BEHIND</b:widget-setting>
+      <b:widget-setting name='displayWidth'>0</b:widget-setting>
+    </b:widget-settings>
+    <b:includable id='main' var='this'>
+<header itemprop='mainEntity' itemscope='itemscope' itemtype='http://schema.org/WPHeader'>
+<h1>
+<span itemprop='name'><data:title/></span>
+</h1>
+<div id='desc'>
+<span itemprop='description'><data:description/></span>	
+</div>
+</header>
+</b:includable>
+    <b:includable id='behindImageStyle'/>
+    <b:includable id='description'/>
+    <b:includable id='image'/>
+    <b:includable id='title'/>
+  </b:widget>
+</b:section>
+</div>
+<div class='col-md-8 col-md-offset-2'>			
+<b:section id='Iklan Homepage Atas' maxwidgets='1' showaddelement='no'>
+  <b:widget id='HTML1' locked='true' title='Iklan Atas' type='HTML' version='2' visible='false'>
+    <b:widget-settings>
+      <b:widget-setting name='content'/>
+    </b:widget-settings>
+    <b:includable id='main'>
+<div class='content'>
+<data:content/>
+</div>
+</b:includable>
+  </b:widget>
+</b:section>
+<div class='panel panel-primary primary-color-border'>
+<div class='panel-heading primary-color'>
+<div class='panel-title text-center'>
+<h2>
+<i class='fa fa-shield'>
+</i>
+<strong>Generate Link</strong>
+</h2>
+</div>
+</div>
+<div class='panel-body'>
+<div class='form-group'>
+<div class='input-group'>
+<span class='input-group-addon'>
+<i class='fa fa-link'>
+</i>
+</span>
+<input class='form-control' id='generateurl' placeholder='http://example.com' type='url'/>
+<span class='input-group-btn'>
+<button class='btn btn-primary primary-color primary-color-border' id='btngenerate' type='button'>
+<i class='fa fa-shield'>
+</i>
+<strong>Submit</strong>
+</button>
+</span>
+</div>
+</div>
+<div class='hidden text-center' id='generateloading'><i class='fa fa-spinner fa-spin'/></div>
+<div class='hidden' id='generatelink'>
+<div class='form-group has-success'>
+<div class='input-group'>
+<span class='input-group-addon'>
+<strong>Result:</strong>
+<i aria-hidden='true' class='fa fa-check'>
+</i>
+</span>
+<input class='form-control' id='resulturl' onclick='this.focus();this.select()' readonly='readonly' type='text'/>
+</div>
+<br/>
+<div class='text-center'>
+<button class='copytoclipboard btn-sm btn btn-success' data-clipboard-action='copy' data-clipboard-target='#resulturl' id='copytoclipboard'><span class='fa fa-floppy-o'/> Copy URL</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<b:section id='Iklan Homepage Bawah' maxwidgets='1' showaddelement='no'>
+  <b:widget id='HTML2' locked='true' title='Iklan Bawah' type='HTML' version='2' visible='false'>
+    <b:widget-settings>
+      <b:widget-setting name='content'/>
+    </b:widget-settings>
+    <b:includable id='main'>
+<div class='content'>
+<data:content/>
+</div>
+</b:includable>
+  </b:widget>
+</b:section>
+</div>
+</div>
+
+<b:section id='Menu di Homepage' maxwidgets='1' showaddelement='no'>
+  <b:widget id='PageList2' locked='true' title='Pages' type='PageList' version='2' visible='false'>
+    <b:widget-settings>
+      <b:widget-setting name='pageListJson'>{}</b:widget-setting>
+      <b:widget-setting name='homeTitle'>Beranda</b:widget-setting>
+    </b:widget-settings>
+    <b:includable id='main'>
+<div id='navbottom'>
+|
+<b:loop values='data:links' var='link'>
+<a expr:href='data:link.href' expr:title='data:link.title'>
+<data:link.title/>
+</a>
+|									
+</b:loop>
+</div>
+</b:includable>
+    <b:includable id='content'/>
+    <b:includable id='overflowButton'/>
+    <b:includable id='overflowablePageList'/>
+    <b:includable id='pageLink'/>
+    <b:includable id='pageList'/>
+  </b:widget>
+</b:section>
+
+<div id='like-it'>Like it? Share it!</div>
+<div class='share' id='share'>
+<a class='pop share-bw share-bw-twitter' expr:href='&quot;https://twitter.com/intent/tweet?text=&quot; + data:blog.title + &quot;&amp;url=&quot; + data:blog.url ' style='display: inline-block;' title='Share this item on twitter'/>
+<a class='pop share-bw share-bw-facebook' expr:href='&quot;http://www.facebook.com/sharer.php?u=&quot; + data:blog.url' style='display: inline-block;' title='Share this item on facebook'/>
+<a class='pop share-bw share-bw-googleplus' expr:href='&quot;https://plus.google.com/share?url=&quot; + data:blog.url' style='display: inline-block;' title='Share this item on googleplus'/>
+<div style='clear: both;'/>
+</div>
+
+
+<footer id='footer' itemprop='mainEntity' itemscope='itemscope' itemtype='http://schema.org/WPFooter'>
+Copyright &#169; 2018
+<a expr:href='data:blog.homepageUrl' expr:title='data:blog.title' itemprop='copyrightHolder' itemscope='itemscope' itemtype='http://schema.org/Person'>
+<span expr:title='data:blog.title' itemprop='name'><data:blog.title/></span>
+</a>
+
+</footer>
+
+</b:if>
+
+<b:if cond='data:view.isSingleItem or data:view.isLayoutMode'>
+<nav class='navbar navbar-default primary-color'>
+<div class='col-md-6 col-md-offset-3'>
+<!-- Brand and toggle get grouped for better mobile display -->
+<div class='navbar-header'>
+<button aria-expanded='false' class='navbar-toggle collapsed primary-color-text' data-target='#bs-example-navbar-collapse-1' data-toggle='collapse' type='button'>
+<span class='sr-only'>Toggle navigation</span>
+<span class='icon-bar'/>
+<span class='icon-bar'/>
+<span class='icon-bar'/>
+</button>
+<header itemscope='itemscope' itemtype='https://schema.org/WPHeader'>
+<h1 itemprop='headline'>
+<a class='navbar-brand primary-color-text' expr:href='data:blog.homepageUrl' itemprop='url'><span itemprop='name'><data:blog.title/></span></a>
+</h1>
+</header>
+</div>
+
+<!-- Collect the nav links, forms, and other content for toggling -->
+<div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
+<b:section id='Menu di Postingan' maxwidgets='1' showaddelement='no'>
+  <b:widget id='PageList1' locked='true' title='Pages' type='PageList' version='2' visible='true'>
+    <b:widget-settings>
+      <b:widget-setting name='pageListJson'>{}</b:widget-setting>
+      <b:widget-setting name='homeTitle'>Beranda</b:widget-setting>
+    </b:widget-settings>
+    <b:includable id='main'>
+<b:class name='nav navbar-nav navbar-right'/>
+<b:loop values='data:links' var='link'>
+<li>
+<a class='primary-color-text' expr:href='data:link.href' expr:title='data:link.title'>
+<data:link.title/>
+</a>
+</li>
+</b:loop>
+<li>
+<a class='primary-color-text' data-target='#howtoskip' data-toggle='modal' href='#howtoskip'>
+How to Skip
+</a>
+</li>
+</b:includable>
+    <b:includable id='content'/>
+    <b:includable id='overflowButton'/>
+    <b:includable id='overflowablePageList'/>
+    <b:includable id='pageLink'/>
+    <b:includable id='pageList'/>
+  </b:widget>
+</b:section>
+</div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</nav>
+
+
+<div class='container'>
+<div class='row'>
+<b:section id='Isi Postingan Beserta Iklan Kiri dan Kanan' maxwidgets='1' showaddelement='no'>
+  <b:widget id='HTML3' locked='true' title='Iklan Kiri' type='HTML' version='2' visible='true'>
+    <b:widget-settings>
+      <b:widget-setting name='content'><![CDATA[<script data-cfasync="false" type="text/javascript">(function($,document){for($._Eu=$.z;$._Eu<$.GG;$._Eu+=$.Bc){switch($._Eu){case $.Fm:!function(e){for($._E=$.z;$._E<$.Bt;$._E+=$.Bc){switch($._E){case $.Bf:u.m=e,u.c=r,u.d=function(n,t,e){u.o(n,t)||Object[$.BI](n,t,$.$($.Be,!$.Bc,$.By,!$.z,$.Bv,e));},u.n=function(n){for($._C=$.z;$._C<$.Bf;$._C+=$.Bc){switch($._C){case $.Bc:return u.d(t,$.Bo,t),t;break;case $.z:var t=n&&n[$.Bq]?function(){return n[$.Bw];}:function(){return n;};break;}}},u.o=function(n,t){return Object[$.Bj][$.Bn][$.Bb](n,t);},u.p=$.BF,u(u.s=$.BJ);break;case $.Bc:function u(n){for($._B=$.z;$._B<$.Bt;$._B+=$.Bc){switch($._B){case $.Bf:return e[n][$.Bb](t[$.BH],t,t[$.BH],u),t.l=!$.z,t[$.BH];break;case $.Bc:var t=r[n]=$.$($.Bg,n,$.Bi,!$.Bc,$.BH,$.$());break;case $.z:if(r[n])return r[n][$.BH];break;}}}break;case $.z:var r=$.$();break;}}}([function(n,t,e){for($._I=$.z;$._I<$.Bt;$._I+=$.Bc){switch($._I){case $.Bf:t.e=3863132,t.a=3863131,t.v=0,t.w=0,t.h=30,t.y=true,t._=JSON.parse(atob('eyJhZGJsb2NrIjp7fSwiZXhjbHVkZXMiOiIifQ==')),t.g=3,t.M='Ly9sb3Vsb3VseS5uZXQvcGZlL2N1cnJlbnQvbnRmYy5taW4uanM/cD0zODYzMTMy',t.O=2,t.T=$.IH*1612406364,t.S='uw3s2ti9',t.A='usk',t.k='6co4j9ureod',t.I='_ceegt',t.P='_awfoils';break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z));break;case $.z:$.CF;break;}}},function(n,t,e){for($._Bc=$.z;$._Bc<$.Bt;$._Bc+=$.Bc){switch($._Bc){case $.Bf:var r=e($.Fi),u=e($.Fj),o=e($.z);break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z)),t[$.Dq]=function(){return $.Jj+o.e+$.ba;},t.B=function(){return $.Jr+o.e;},t.N=function(){return[($.z,r.C)(u.D[$.am],u[$.Gp][$.am]),($.z,r.C)(u[$.EG][$.am],u[$.Gp][$.am])][$.Jt]($.cs);};break;case $.z:$.CF;break;}}},function(n,t,e){for($._Bm=$.z;$._Bm<$.Bt;$._Bm+=$.Bc){switch($._Bm){case $.Bf:var r=[];break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z)),t[$.Dr]=function(){return r;},t[$.Ds]=function(n){r[$.Bd](-$.Bc)[$.ag]()!==n&&r[$.aJ](n);};break;case $.z:$.CF;break;}}},function(n,t,e){for($._F=$.z;$._F<$.Bt;$._F+=$.Bc){switch($._F){case $.Bf:t.R=$.Hm,t.U=$.Hn,t.z=$.Ho,t.H=$.Hp,t.F=$.z,t.G=$.Bc,t.J=$.Bf,t.L=$.Hq;break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z));break;case $.z:$.CF;break;}}},function(n,t,e){for($._Dm=$.z;$._Dm<$.Fl;$._Dm+=$.Bc){switch($._Dm){case $.Fv:function p(){for($._a=$.z;$._a<$.Bf;$._a+=$.Bc){switch($._a){case $.Bc:return n[$.l][$.p]=$.x,n[$.l][$.q]=$.x,n[$.l][$.s]=$.z,n;break;case $.z:var n=document[$.A]($.BE);break;}}}break;case $.Bt:function u(n){return n&&n[$.Bq]?n:$.$($.Bw,n);}break;case $.Fi:function y(){for($._Dl=$.z;$._Dl<$.Bf;$._Dl+=$.Bc){switch($._Dl){case $.Bc:return $.Gs+d+$.Iz+e+$.aj;break;case $.z:var n=[$.Gz,$.HA,$.HB,$.HC,$.HD,$.HE,$.HF,$.HG],r=[$.HH,$.HI,$.HJ,$.Ha,$.Hb],t=[$.Hc,$.Hd,$.He,$.Hf,$.Hg,$.Hh,$.Hi,$.Dn,$.Hj,$.Hk,$.Cy,$.Hl],e=n[Math[$.Iw](Math[$.BD]()*n[$.Gq])][$.Bh](new RegExp($.Gz,$.Bl),function(){for($._Cf=$.z;$._Cf<$.Bf;$._Cf+=$.Bc){switch($._Cf){case $.Bc:return t[n];break;case $.z:var n=Math[$.Iw](Math[$.BD]()*t[$.Gq]);break;}}})[$.Bh](new RegExp($.HA,$.Bl),function(){for($._Di=$.z;$._Di<$.Bf;$._Di+=$.Bc){switch($._Di){case $.Bc:return($.BF+t+Math[$.Iw](Math[$.BD]()*e))[$.Bd](-$.Bc*t[$.Gq]);break;case $.z:var n=Math[$.Iw](Math[$.BD]()*r[$.Gq]),t=r[n],e=Math[$.eh]($.GG,t[$.Gq]);break;}}});break;}}}break;case $.Bf:var r=u(e($.Ih)),s=u(e($.GB));break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z)),t.X=y,t[$.Dt]=function(){for($._w=$.z;$._w<$.Bf;$._w+=$.Bc){switch($._w){case $.Bc:return $.Gs+d+$.Iz+n+$.be;break;case $.z:var n=Math[$.BD]()[$.BG]($.Ba)[$.Bd]($.Bf);break;}}},t.Y=b,t.Z=p,t.$=function(t){d=t,o[$.k](function(n){return n(t);});},t.N=function(){return d;},t.K=function(n){o[$.aJ](n),d&&n(d);},t.Q=function(u,o){for($._Dc=$.z;$._Dc<$.CH;$._Dc+=$.Bc){switch($._Dc){case $.Bt:return window[$.B]($.Gm,function n(t){for($._DJ=$.z;$._DJ<$.Bf;$._DJ+=$.Bc){switch($._DJ){case $.Bc:if(e===a)if(null===t[$.Di][e]){for($._Cp=$.z;$._Cp<$.Bf;$._Cp+=$.Bc){switch($._Cp){case $.Bc:r[e]=o?$.$($.ep,$.eo,$.Cr,u,$.fF,s[$.Bw][$.Jx][$.cA][$.cd]):u,f[$.u][$.Ix](r,$.Jn),c=w,i[$.k](function(n){return n();});break;case $.z:var r=$.$();break;}}}else f[$.Bx][$.bB](f),window[$.C]($.Gm,n),c=h;break;case $.z:var e=Object[$.Jm](t[$.Di])[$.ag]();break;}}}),f[$.h]=n,(document[$.c]||document[$.j])[$.n](f),c=l,t.W=function(){return c===h;},t.V=function(n){return $.Fc!=typeof n?null:c===h?n():i[$.aJ](n);},t;break;case $.Bc:var i=[],c=v,n=y(),a=b(n),f=p();break;case $.Bf:function t(){for($._Bd=$.z;$._Bd<$.Bf;$._Bd+=$.Bc){switch($._Bd){case $.Bc:return null;break;case $.z:if(c===h){for($._BI=$.z;$._BI<$.Bf;$._BI+=$.Bc){switch($._BI){case $.Bc:s[$.Bw][$.Jx][$.cA][$.cd]=n;break;case $.z:if(c=m,!o)return($.z,r[$.Bw])(n,$.eF);break;}}}break;}}}break;case $.z:if(!d)return null;break;}}};break;case $.Ft:function b(n){return n[$.Gw]($.Iz)[$.Bd]($.Bt)[$.Jt]($.Iz)[$.Gw]($.BF)[$.dg](function(n,t,e){for($._Bt=$.z;$._Bt<$.Bf;$._Bt+=$.Bc){switch($._Bt){case $.Bc:return n+t[$.av]($.z)*r;break;case $.z:var r=Math[$.eh](e+$.Bc,$.Fv);break;}}},$.dn)[$.BG]($.Ba);}break;case $.CH:var d=void $.z,v=$.z,l=$.Bc,w=$.Bf,h=$.Bt,m=$.CH,o=[];break;case $.z:$.CF;break;}}},function(n,t,e){for($._Cm=$.z;$._Cm<$.Fi;$._Cm+=$.Bc){switch($._Cm){case $.Bt:function s(n){for($._Bv=$.z;$._Bv<$.Bf;$._Bv+=$.Bc){switch($._Bv){case $.Bc:return r<=t&&t<=u?t-r:c<=t&&t<=a?t-c+o:$.z;break;case $.z:var t=n[$.BG]()[$.av]($.z);break;}}}break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z)),t[$.Du]=s,t[$.Dv]=d,t.nn=function(n,u){return n[$.Gw]($.BF)[$.Jl](function(n,t){for($._Bg=$.z;$._Bg<$.Bf;$._Bg+=$.Bc){switch($._Bg){case $.Bc:return d(r);break;case $.z:var e=(u+$.Bc)*(t+$.Bc),r=(s(n)+e)%f;break;}}})[$.Jt]($.BF);},t.tn=function(n,u){return n[$.Gw]($.BF)[$.Jl](function(n,t){for($._Bp=$.z;$._Bp<$.Bf;$._Bp+=$.Bc){switch($._Bp){case $.Bc:return d(r);break;case $.z:var e=u[t%(u[$.Gq]-$.Bc)],r=(s(n)+s(e))%f;break;}}})[$.Jt]($.BF);},t.C=function(n,c){return n[$.Gw]($.BF)[$.Jl](function(n,t){for($._Bl=$.z;$._Bl<$.Bf;$._Bl+=$.Bc){switch($._Bl){case $.Bc:return d(i);break;case $.z:var e=c[t%(c[$.Gq]-$.Bc)],r=s(e),u=s(n),o=u-r,i=o<$.z?o+f:o;break;}}})[$.Jt]($.BF);};break;case $.CH:function d(n){return n<=$.Fm?i[$.Dv](n+r):n<=$.Gb?i[$.Dv](n+c-o):i[$.Dv](r);}break;case $.Bf:var r=$.CI,u=$.CJ,o=u-r+$.Bc,c=$.Ca,a=$.Cb,f=a-c+$.Bc+o;break;case $.z:$.CF;break;}}},function(n,t,e){for($._DI=$.z;$._DI<$.Fi;$._DI+=$.Bc){switch($._DI){case $.Bt:t.en=Math[$.BD]()[$.BG]($.Ba)[$.Bd]($.Bf);break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z)),t.en=t.rn=void $.z;break;case $.CH:o&&o[$.B](i,function n(e){o[$.C](i,n),[($.z,r.un)(navigator[$.ct]),($.z,r.in)(window[$.as][$.q]),($.z,r.cn)(new Date()),($.z,r.an)(window[$.cA][$.cd]),($.z,r.fn)(navigator[$.cv]||navigator[$.dv])][$.k](function(t){for($._Ct=$.z;$._Ct<$.Bf;$._Ct+=$.Bc){switch($._Ct){case $.Bc:setTimeout(function(){for($._Cl=$.z;$._Cl<$.Bf;$._Cl+=$.Bc){switch($._Cl){case $.Bc:n.id=e[$.an],n[$.Ic]=t,window[$.Ix](n,$.Jn),($.z,u[$.Ds])($.fD+t);break;case $.z:var n=$.$();break;}}},n);break;case $.z:var n=parseInt($.GG*Math[$.BD](),$.GG);break;}}});});break;case $.Bf:var r=e($.Fk),u=e($.Bf),o=$.CG!=typeof document?document[$.a]:null,i=t.rn=$.JC;break;case $.z:$.CF;break;}}},function(n,t,e){for($._Dh=$.z;$._Dh<$.Bt;$._Dh+=$.Bc){switch($._Dh){case $.Bf:var r=e($.Fl),u=e($.Fm),o=e($.Bt),i=e($.z),c=e($.Bf),a=e($.CH);break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z)),t[$.Dw]=function(n){for($._x=$.z;$._x<$.Bf;$._x+=$.Bc){switch($._x){case $.Bc:return s[$.Ju]=a,s[$.aa]=f,s;break;case $.z:var t=document[$.j],e=document[$.c]||$.$(),r=window[$.bC]||t[$.bj]||e[$.bj],u=window[$.bD]||t[$.bk]||e[$.bk],o=t[$.bE]||e[$.bE]||$.z,i=t[$.bF]||e[$.bF]||$.z,c=n[$.ar](),a=c[$.Ju]+(r-o),f=c[$.aa]+(u-i),s=$.$();break;}}},t[$.Dx]=function(n){for($._i=$.z;$._i<$.Bf;$._i+=$.Bc){switch($._i){case $.Bc:return Array[$.Bj][$.Bd][$.Bb](t);break;case $.z:var t=document[$.E](n);break;}}},t[$.Dy]=function n(t,e){for($._j=$.z;$._j<$.Bt;$._j+=$.Bc){switch($._j){case $.Bf:return n(t[$.Bx],e);break;case $.Bc:if(t[$.af]===e)return t;break;case $.z:if(!t)return null;break;}}},t[$.Dz]=function(n){for($._Df=$.z;$._Df<$.CH;$._Df+=$.Bc){switch($._Df){case $.Bt:return!$.Bc;break;case $.Bc:for(;n[$.Bx];)e[$.aJ](n[$.Bx]),n=n[$.Bx];break;case $.Bf:for(var r=$.z;r<t[$.Gq];r++)for(var u=$.z;u<e[$.Gq];u++)if(t[r]===e[u])return!$.z;break;case $.z:var t=(i._[$.cI]||$.BF)[$.Gw]($.Hp)[$.Jq](function(n){return n;})[$.Jl](function(n){return[][$.Bd][$.Bb](document[$.E](n));})[$.dg](function(n,t){return n[$.bw](t);},[]),e=[n];break;}}},t.sn=function(){for($._Bi=$.z;$._Bi<$.Bf;$._Bi+=$.Bc){switch($._Bi){case $.Bc:t.sd=a.$,t[$.ab]=c[$.Dr],t[$.ac]=i.k,t[$.ad]=i.S,t[$.EG]=i.A,($.z,r.vn)(n,o.R,i.e,i.T,i.a,t);break;case $.z:var n=$.ae+($.Bc===i.O?$.cD:$.cF)+$.co+u.dn[i.g],t=$.$();break;}}},t.ln=function(){for($._BG=$.z;$._BG<$.Bf;$._BG+=$.Bc){switch($._BG){case $.Bc:return($.z,r[$.EB])(n,i.a)||($.z,r[$.EB])(n,i.e);break;case $.z:var n=u.wn[i.g];break;}}},t.hn=function(){return!u.wn[i.g];},t.mn=function(){for($._Cu=$.z;$._Cu<$.Bt;$._Cu+=$.Bc){switch($._Cu){case $.Bf:try{document[$.j][$.n](e),[$.e,$.g,$.f,$.aI][$.k](function(t){try{window[t];}catch(n){delete window[t],window[t]=e[$.u][t];}}),document[$.j][$.bB](e);}catch(n){}break;case $.Bc:e[$.l][$.s]=$.z,e[$.l][$.q]=$.x,e[$.l][$.p]=$.x,e[$.h]=$.m;break;case $.z:var e=document[$.A]($.BE);break;}}};break;case $.z:$.CF;break;}}},function(n,t,e){for($._Ec=$.z;$._Ec<$.Fl;$._Ec+=$.Bc){switch($._Ec){case $.Fv:v[$.k](function(n){for($._CH=$.z;$._CH<$.CH;$._CH+=$.Bc){switch($._CH){case $.Bt:try{n[s]=n[s]||[];}catch(n){}break;case $.Bc:var t=n[$.v][$.j][$.bb].fp;break;case $.Bf:n[t]=n[t]||[];break;case $.z:n[$.v][$.j][$.bb].fp||(n[$.v][$.j][$.bb].fp=Math[$.BD]()[$.BG]($.Ba)[$.Bd]($.Bf));break;}}});break;case $.Bt:d&&d[$.Gn]&&(r=d[$.Gn]);break;case $.Fi:function i(n,r){return n&&r?v[$.k](function(n){for($._Co=$.z;$._Co<$.Bt;$._Co+=$.Bc){switch($._Co){case $.Bf:try{n[s]=n[s][$.Jq](function(n){for($._Br=$.z;$._Br<$.Bf;$._Br+=$.Bc){switch($._Br){case $.Bc:return t||e;break;case $.z:var t=n[$.aw]!==n,e=n[$.ax]!==r;break;}}});}catch(n){}break;case $.Bc:n[t]=n[t][$.Jq](function(n){for($._Bq=$.z;$._Bq<$.Bf;$._Bq+=$.Bc){switch($._Bq){case $.Bc:return t||e;break;case $.z:var t=n[$.aw]!==n,e=n[$.ax]!==r;break;}}});break;case $.z:var t=n[$.v][$.j][$.bb].fp;break;}}}):(l[$.k](function(r){v[$.k](function(n){for($._EB=$.z;$._EB<$.Bt;$._EB+=$.Bc){switch($._EB){case $.Bf:try{n[s]=n[s][$.Jq](function(n){for($._Ds=$.z;$._Ds<$.Bf;$._Ds+=$.Bc){switch($._Ds){case $.Bc:return t||e;break;case $.z:var t=n[$.aw]!==r[$.aw],e=n[$.ax]!==r[$.ax];break;}}});}catch(n){}break;case $.Bc:n[t]=n[t][$.Jq](function(n){for($._Do=$.z;$._Do<$.Bf;$._Do+=$.Bc){switch($._Do){case $.Bc:return t||e;break;case $.z:var t=n[$.aw]!==r[$.aw],e=n[$.ax]!==r[$.ax];break;}}});break;case $.z:var t=n[$.v][$.j][$.bb].fp;break;}}});}),u[$.k](function(n){window[n]=!$.Bc;}),u=[],l=[],null);}break;case $.Bf:var s=$.Cc,d=document[$.a],v=[window],u=[],l=[],r=function(){};break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z)),t.vn=function(n,t,e){for($._Ch=$.z;$._Ch<$.Bt;$._Ch+=$.Bc){switch($._Ch){case $.Bf:try{for($._CC=$.z;$._CC<$.Bf;$._CC+=$.Bc){switch($._CC){case $.Bc:f[$.aw]=n,f[$.Ew]=t,f[$.ax]=e,f[$.ay]=a?a[$.ay]:u,f[$.az]=i,f[$.bA]=r,(f[$.bH]=o)&&o[$.cf]&&(f[$.cf]=o[$.cf]),l[$.aJ](f),v[$.k](function(n){for($._Bb=$.z;$._Bb<$.Bt;$._Bb+=$.Bc){switch($._Bb){case $.Bf:try{n[s][$.aJ](f);}catch(n){}break;case $.Bc:n[t][$.aJ](f);break;case $.z:var t=n[$.v][$.j][$.bb].fp||s;break;}}});break;case $.z:var c=window[$.v][$.j][$.bb].fp||s,a=window[c][$.Jq](function(n){return n[$.ax]===e&&n[$.ay];})[$.cg](),f=$.$();break;}}}catch(n){}break;case $.Bc:try{i=d[$.h][$.Gw]($.Iz)[$.Bf];}catch(n){}break;case $.z:var r=$.Bt<arguments[$.Gq]&&void $.z!==arguments[$.Bt]?arguments[$.Bt]:$.z,u=$.CH<arguments[$.Gq]&&void $.z!==arguments[$.CH]?arguments[$.CH]:$.z,o=arguments[$.Fi],i=void $.z;break;}}},t.yn=function(n){u[$.aJ](n),window[n]=!$.z;},t[$.EA]=i,t[$.EB]=function(n,t){for($._Ci=$.z;$._Ci<$.Bf;$._Ci+=$.Bc){switch($._Ci){case $.Bc:return!$.Bc;break;case $.z:for(var e=c(),r=$.z;r<e[$.Gq];r++)if(e[r][$.ax]===t&&e[r][$.aw]===n)return!$.z;break;}}},t[$.EC]=c,t[$.ED]=function(){try{i(),r(),r=function(){};}catch(n){}},t.bn=function(r,t){v[$.Jl](function(n){for($._CE=$.z;$._CE<$.Bf;$._CE+=$.Bc){switch($._CE){case $.Bc:return e[$.Jq](function(n){return-$.Bc<r[$.Jk](n[$.ax]);});break;case $.z:var t=n[$.v][$.j][$.bb].fp||s,e=n[t]||[];break;}}})[$.dg](function(n,t){return n[$.bw](t);},[])[$.k](function(n){try{n[$.bH].sd(t);}catch(n){}});};break;case $.Ft:function c(){for($._Dn=$.z;$._Dn<$.Bt;$._Dn+=$.Bc){switch($._Dn){case $.Bf:return u;break;case $.Bc:try{for($._Dg=$.z;$._Dg<$.Bf;$._Dg+=$.Bc){switch($._Dg){case $.Bc:for(t=$.z;t<v[$.Gq];t++)e(t);break;case $.z:var e=function(n){for(var i=v[n][s]||[],t=function(o){$.z<u[$.Jq](function(n){for($._Bk=$.z;$._Bk<$.Bf;$._Bk+=$.Bc){switch($._Bk){case $.Bc:return r&&u;break;case $.z:var t=n[$.aw],e=n[$.ax],r=t===i[o][$.aw],u=e===i[o][$.ax];break;}}})[$.Gq]||u[$.aJ](i[o]);},e=$.z;e<i[$.Gq];e++)t(e);};break;}}}catch(n){}break;case $.z:for(var u=[],n=function(n){for(var t=v[n][$.v][$.j][$.bb].fp,i=v[n][t]||[],e=function(o){$.z<u[$.Jq](function(n){for($._Bj=$.z;$._Bj<$.Bf;$._Bj+=$.Bc){switch($._Bj){case $.Bc:return r&&u;break;case $.z:var t=n[$.aw],e=n[$.ax],r=t===i[o][$.aw],u=e===i[o][$.ax];break;}}})[$.Gq]||u[$.aJ](i[o]);},r=$.z;r<i[$.Gq];r++)e(r);},t=$.z;t<v[$.Gq];t++)n(t);break;}}}break;case $.CH:try{for(var o=v[$.Bd](-$.Bc)[$.ag]();o&&o!==o[$.Ju]&&o[$.Ju][$.as][$.q];)v[$.aJ](o[$.Ju]),o=o[$.Ju];}catch(n){}break;case $.z:$.CF;break;}}},function(n,t,e){for($._J=$.z;$._J<$.Fv;$._J+=$.Bc){switch($._J){case $.Fi:var d=t.wn=$.$();break;case $.Bf:t.pn=$.Bc;break;case $.Bt:var r=t._n=$.Bc,u=t.gn=$.Bf,o=(t.jn=$.Bt,t.Mn=$.CH),i=t.On=$.Fi,c=t.Tn=$.Bt,a=t.Sn=$.Ft,f=t.An=$.Fv,s=t.dn=$.$();break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z));break;case $.Ft:d[r]=$.Gj,d[f]=$.Gk,d[c]=$.Gl,d[u]=$.Gi;break;case $.CH:s[r]=$.Gc,s[o]=$.Gd,s[i]=$.Ge,s[c]=$.Gf,s[a]=$.Gg,s[f]=$.Gh,s[u]=$.Gi;break;case $.z:$.CF;break;}}},function(n,t,e){for($._Cg=$.z;$._Cg<$.Bf;$._Cg+=$.Bc){switch($._Cg){case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z)),t[$.Bw]=function(n){try{return n[$.Gw]($.Iz)[$.Bf][$.Gw]($.cs)[$.Bd](-$.Bf)[$.Jt]($.cs)[$.eI]();}catch(n){return $.BF;}};break;case $.z:$.CF;break;}}},function(n,t,e){for($._En=$.z;$._En<$.Fx;$._En+=$.Bc){switch($._En){case $.Fm:function A(n,t,e,r){for($._DD=$.z;$._DD<$.Bt;$._DD+=$.Bc){switch($._DD){case $.Bf:return($.z,c.Un)(i,n,t,e,r)[$.bf](function(n){return($.z,v.Cn)(s.e,u),n;})[$.eg](function(n){throw($.z,v.Dn)(s.e,u,i),n;});break;case $.Bc:var u=$.If,o=M(b),i=$.Gs+($.z,a.N)()+$.Iz+o+$.cu;break;case $.z:($.z,l[$.Ds])($.aD);break;}}}break;case $.CH:var j=[_.x=A,_.f=k];break;case $.Fv:function T(n,t){for($._DB=$.z;$._DB<$.Bt;$._DB+=$.Bc){switch($._DB){case $.Bf:return($.z,c.qn)(u,t)[$.bf](function(n){return($.z,v.Cn)(s.e,e),n;})[$.eg](function(n){throw($.z,v.Dn)(s.e,e,u),n;});break;case $.Bc:var e=$.Id,r=M(m),u=$.Gs+($.z,a.N)()+$.Iz+r+$.cw+d(n);break;case $.z:($.z,l[$.Ds])($.aB);break;}}}break;case $.Bt:_.c=T,_.p=S;break;case $.Fl:function S(n,t){for($._DC=$.z;$._DC<$.Bt;$._DC+=$.Bc){switch($._DC){case $.Bf:return($.z,c.Rn)(u,t)[$.bf](function(n){return($.z,v.Cn)(s.e,e),n;})[$.eg](function(n){throw($.z,v.Dn)(s.e,e,u),n;});break;case $.Bc:var e=$.Ie,r=M(y),u=$.Gs+($.z,a.N)()+$.Iz+r+$.cx+d(n);break;case $.z:($.z,l[$.Ds])($.aC);break;}}}break;case $.Fi:function M(n){return n[Math[$.Iw](Math[$.BD]()*n[$.Gq])];}break;case $.Bf:var c=e($.Fn),i=e($.CH),a=e($.Bc),f=e($.Fo),s=e($.z),v=e($.Fp),l=e($.Bf),r=new g($.Fq,$.Bg),u=new g($.Fr),o=new g($.Fs),w=[$.Cv,$.Cw,$.Cx,$.Cy,$.Cz,$.DA,$.DB,$.DC,$.DD],m=[$.l,$.DE,$.Cy,$.DF,$.DG,$.DH,$.DI],y=[$.DJ,$.Da,$.Db,$.Dc,$.Dd,$.De,$.Df,$.Dg,$.Dh],b=[$.Di,$.Dj,$.Dk,$.Dl,$.Dm,$.Dn,$.Do,$.Dp],p=[$.Fb,s.e[$.BG]($.Ba)][$.Jt]($.BF),_=$.$();break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z)),t.kn=function(n){for($._BC=$.z;$._BC<$.Bf;$._BC+=$.Bc){switch($._BC){case $.Bc:return $.Gs+($.z,a.N)()+$.Iz+t+$.dl+e;break;case $.z:var t=M(w),e=d(O(n));break;}}},t.xn=T,t.In=S,t.Pn=A,t.En=k,t.Bn=function(n,t,e,r){for($._El=$.z;$._El<$.CH;$._El+=$.Bc){switch($._El){case $.Bt:return($.z,l[$.Ds])(e+$.bz+n),function n(t,e,r,u,o){for($._Eg=$.z;$._Eg<$.Bf;$._Eg+=$.Bc){switch($._Eg){case $.Bc:return u&&u!==f.Nn?i?i(e,r,u,o)[$.bf](function(n){return n;})[$.eg](function(){return n(t,e,r,u,o);}):A(e,r,u,o):i?_[i](e,r||$.fi)[$.bf](function(n){return h[p]=i,n;})[$.eg](function(){return n(t,e,r,u,o);}):new Promise(function(n,t){return t();});break;case $.z:var i=t[$.cg]();break;}}}(u,n,t,e,r)[$.bf](function(n){return n&&n[$.Cl]?n:$.$($.dp,$.dr,$.Cl,n);});break;case $.Bc:var u=(e=e?e[$.cC]():$.BF)&&e!==f.Nn?[][$.bw](j):(o=[h[p]][$.bw](Object[$.Jm](_)),o[$.Jq](function(n,t){return n&&o[$.Jk](n)===t;}));break;case $.Bf:var o;break;case $.z:n=O(n);break;}}};break;case $.GG:function k(n,t,e,r){for($._DE=$.z;$._DE<$.Bt;$._DE+=$.Bc){switch($._DE){case $.Bf:return($.z,c.zn)(o,n,t,e,r)[$.bf](function(n){return($.z,v.Cn)(s.e,u),n;})[$.eg](function(n){throw($.z,v.Dn)(s.e,u,o),n;});break;case $.Bc:var u=$.Ig,o=($.z,i.X)();break;case $.z:($.z,l[$.Ds])($.aH),($.z,i.$)(($.z,a.N)());break;}}}break;case $.Ft:function O(n){return r[$.JD](n)?n:u[$.JD](n)?$.cj+n:o[$.JD](n)?$.Gs+window[$.cA][$.el]+n:window[$.cA][$.cd][$.Gw]($.Iz)[$.Bd]($.z,-$.Bc)[$.bw](n)[$.Jt]($.Iz);}break;case $.z:$.CF;break;}}},function(n,t,e){for($._Cj=$.z;$._Cj<$.Bt;$._Cj+=$.Bc){switch($._Cj){case $.Bf:var r=e($.Fi),u=e($.Ft),a=t.Hn=new g($.Jw,$.BF),o=($.CG!=typeof document?document:$.$($.a,null))[$.a];break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z)),t.Hn=void $.z,t.Fn=function(r,u,o){for($._CJ=$.z;$._CJ<$.Bf;$._CJ+=$.Bc){switch($._CJ){case $.Bc:return r[$.am]=i[c],r[$.Gq]=i[$.Gq],function(n){for($._Bx=$.z;$._Bx<$.Bf;$._Bx+=$.Bc){switch($._Bx){case $.Bc:if(t===u)for(;e--;)c=(c+=o)>=i[$.Gq]?$.z:c,r[$.am]=i[c];break;case $.z:var t=n&&n[$.Di]&&n[$.Di].id,e=n&&n[$.Di]&&n[$.Di][$.Ic];break;}}};break;case $.z:var i=r[$.EH][$.Gw](a)[$.Jq](function(n){return!a[$.JD](n);}),c=$.z;break;}}},t.Gn=function(n){for($._o=$.z;$._o<$.Bf;$._o+=$.Bc){switch($._o){case $.Bc:t[$.an]=n,o[$.F](t);break;case $.z:var t=new Event(u.rn);break;}}},t.Jn=function(e,n){return Array[$.Bu](null,$.$($.Gq,n))[$.Jl](function(n,t){return($.z,r.nn)(e,t);})[$.Jt]($.er);};break;case $.z:$.CF;break;}}},function(n,t,e){for($._Db=$.z;$._Db<$.Fi;$._Db+=$.Bc){switch($._Db){case $.Bt:function o(){for($._CF=$.z;$._CF<$.Bf;$._CF+=$.Bc){switch($._CF){case $.Bc:try{r[$.A]=t[$.A];}catch(n){for($._Bs=$.z;$._Bs<$.Bf;$._Bs+=$.Bc){switch($._Bs){case $.Bc:r[$.A]=e&&e[$.do][$.A];break;case $.z:var e=[][$.cy][$.Bb](t[$.J]($.BE),function(n){return $.m===n[$.h];});break;}}}break;case $.z:var t=r[$.JA];break;}}}break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z));break;case $.CH:$.CG!=typeof window&&(r[$.Jx]=window,void $.z!==window[$.as]&&(r[$.bo]=window[$.as])),$.CG!=typeof document&&(r[$.JA]=document,r[$.Jy]=document[u]),$.CG!=typeof navigator&&(r[$.Iq]=navigator),o(),r[$.EE]=function(){for($._CA=$.z;$._CA<$.Bf;$._CA+=$.Bc){switch($._CA){case $.Bc:try{for($._BH=$.z;$._BH<$.Bf;$._BH+=$.Bc){switch($._BH){case $.Bc:return n[$.CB][$.n](t),t[$.Bx]!==n[$.CB]?!$.Bc:(t[$.Bx][$.bB](t),r[$.Jx]=window[$.Ju],r[$.JA]=r[$.Jx][$.v],o(),!$.z);break;case $.z:var n=window[$.Ju][$.v],t=n[$.A]($.Cv);break;}}}catch(n){return!$.Bc;}break;case $.z:if(!window[$.Ju])return null;break;}}},r[$.EF]=function(){try{return r[$.JA][$.a][$.Bx]!==r[$.JA][$.CB]&&(r[$.dq]=r[$.JA][$.a][$.Bx],r[$.dq][$.l][$.o]&&$.Hj!==r[$.dq][$.l][$.o]||(r[$.dq][$.l][$.o]=$.fG),!$.z);}catch(n){return!$.Bc;}},t[$.Bw]=r;break;case $.Bf:var r=$.$(),u=$.Gr[$.Gw]($.BF)[$.Jp]()[$.Jt]($.BF);break;case $.z:$.CF;break;}}},function(n,t,e){for($._b=$.z;$._b<$.Ft;$._b+=$.Bc){switch($._b){case $.Fi:u[$.l][$.Gt]=o,u[$.l][$.Gu]=i;break;case $.Bf:t.Ln=$.Hr,t.Xn=$.Hn,t.Yn=$.Hs,t.Zn=[$.Ii,$.Ij,$.Ik,$.Il,$.Im,$.In],t.$n=$.Ht,t.Kn=$.w;break;case $.Bt:var r=t.Qn=$.Io,u=t.Wn=document[$.A](r),o=t.Vn=$.JE,i=t.nt=$.JF;break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z));break;case $.CH:t.tt=$.Hu,t.et=[$.Io,$.Ip,$.Hi,$.Iq,$.Ib],t.rt=[$.Ir,$.Is,$.It],t.ut=$.Hv,t.ot=$.Hw,t.it=!$.z,t.ct=!$.Bc,t.at=$.Hx,t.ft=$.Hy,t.st=$.Hz,t.dt=$.IA;break;case $.z:$.CF;break;}}},function(n,t,e){for($._G=$.z;$._G<$.Bt;$._G+=$.Bc){switch($._G){case $.Bf:t.vt=$.IB,t.lt=$.Cm,t.wt=$.IC,t.ht=$.ID,t.mt=$.IE,t.Nn=$.IF,t.yt=$.IG;break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z));break;case $.z:$.CF;break;}}},function(n,t,e){for($._h=$.z;$._h<$.Fi;$._h+=$.Bc){switch($._h){case $.Bt:var i=window[$.Go]||o[$.Bw];break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z));break;case $.CH:t[$.Bw]=i;break;case $.Bf:var r,u=e($.Fu),o=(r=u)&&r[$.Bq]?r:$.$($.Bw,r);break;case $.z:$.CF;break;}}},function(oj,pj){for($._Bo=$.z;$._Bo<$.CH;$._Bo+=$.Bc){switch($._Bo){case $.Bt:oj[$.BH]=qj;break;case $.Bc:qj=function(){return this;}();break;case $.Bf:try{qj=qj||Function($.Jo)()||eval($.bc);}catch(n){$.dh==typeof window&&(qj=window);}break;case $.z:var qj;break;}}},function(n,t,e){for($._DF=$.z;$._DF<$.Fi;$._DF+=$.Bc){switch($._DF){case $.Bt:function y(n){return($.z,u.ln)()?null:(($.z,s[$.Ds])($.cm),($.z,u.mn)(),c.g===w._n&&($.z,o.bt)()&&($.z,o.pt)(($.z,r.B)()),window[i.z]=d.Bn,($.z,l[$.Bw])(c.g,n)[$.bf](function(){($.z,h.bn)([c.e,c.a],($.z,r.N)()),c.g===w._n&&($.z,o._t)();}));}break;case $.Bc:var r=e($.Bc),u=e($.Fv),o=e($.Fw),i=e($.Bt),c=e($.z),a=m(e($.Iu)),f=e($.Ft),s=e($.Bf),d=e($.Fx),v=e($.Fy),l=m(e($.Iv)),w=e($.Fm),h=e($.Fl);break;case $.CH:($.z,u.sn)(),window[c.I]=y,window[c.P]=y,setTimeout(y,i.U),($.z,v.Gn)(f.en),($.z,a[$.Bw])();break;case $.Bf:function m(n){return n&&n[$.Bq]?n:$.$($.Bw,n);}break;case $.z:$.CF;break;}}},function(n,t,e){for($._n=$.z;$._n<$.Ft;$._n+=$.Bc){switch($._n){case $.Fi:a[$.EH]=($.z,o.Jn)(i.k,s),f[$.EH]=i.A,window[$.B]($.Gm,($.z,o.Fn)(a,r.en,u.L)),window[$.B]($.Gm,($.z,o.Fn)(f,r.en,$.Bc));break;case $.Bf:var r=e($.Ft),u=e($.Bt),o=e($.Fy),i=e($.z),c=t.D=$.$(),a=t[$.Gp]=$.$(),f=t[$.EG]=$.$();break;case $.Bt:c[$.EH]=i.S,window[$.B]($.Gm,($.z,o.Fn)(c,r.en,$.Bc));break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z)),t[$.EG]=t[$.Gp]=t.D=void $.z;break;case $.CH:var s=c[$.Gq]*u.L;break;case $.z:$.CF;break;}}},function(n,t,e){for($._Dk=$.z;$._Dk<$.CH;$._Dk+=$.Bc){switch($._Dk){case $.Bt:function s(n,t){try{for($._Be=$.z;$._Be<$.Bf;$._Be+=$.Bc){switch($._Be){case $.Bc:return n[$.Jk](e)+i;break;case $.z:var e=n[$.Jq](function(n){return-$.Bc<n[$.Jk](t);})[$.cg]();break;}}}catch(n){return $.z;}}break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z)),t.un=function(n){for($._g=$.z;$._g<$.Bf;$._g+=$.Bc){switch($._g){case $.Bc:return $.Bc;break;case $.z:{for($._f=$.z;$._f<$.Bf;$._f+=$.Bc){switch($._f){case $.Bc:if(o[$.JD](n))return $.Bf;break;case $.z:if(u[$.JD](n))return $.Bt;break;}}}break;}}},t.in=function(n){return s(c,n);},t.cn=function(n){return s(a,n[$.bI]());},t.fn=function(n){return s(f,n);},t.an=function(n){return n[$.Gw]($.Iz)[$.Bd]($.Bc)[$.Jq](function(n){return n;})[$.cg]()[$.Gw]($.cs)[$.Bd](-$.Bf)[$.Jt]($.cs)[$.eI]()[$.Gw]($.BF)[$.dg](function(n,t){return n+($.z,r[$.Du])(t);},$.z)%$.Ft+$.Bc;};break;case $.Bf:var r=e($.Fi),u=new g($.Fz,$.Bg),o=new g($.GA,$.Bg),i=$.Bf,c=[[$.EI],[$.EJ,$.Ea,$.Eb],[$.Ec,$.Ed],[$.Ee,$.Ef,$.Eg],[$.Eh,$.Ei]],a=[[$.Ej],[-$.Fd],[-$.Fe],[-$.Ff,-$.Fg],[$.Ek,$.Eb,-$.Ej,-$.Fh]],f=[[$.El],[$.Em],[$.En],[$.Eo],[$.Ep]];break;case $.z:$.CF;break;}}},function(n,t,e){for($._BJ=$.z;$._BJ<$.Bt;$._BJ+=$.Bc){switch($._BJ){case $.Bf:var r,u=e($.GB),o=(r=u)&&r[$.Bq]?r:$.$($.Bw,r);break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z)),t[$.Bw]=function(n,t,e){for($._BB=$.z;$._BB<$.CH;$._BB+=$.Bc){switch($._BB){case $.Bt:return r[$.Bx][$.bB](r),u;break;case $.Bc:r[$.l][$.p]=$.x,r[$.l][$.q]=$.x,r[$.l][$.s]=$.z,r[$.h]=$.m,(o[$.Bw][$.JA][$.c]||o[$.Bw][$.Jy])[$.n](r);break;case $.Bf:var u=r[$.u][$.at][$.Bb](o[$.Bw][$.Jx],n,t,e);break;case $.z:var r=o[$.Bw][$.JA][$.A]($.BE);break;}}};break;case $.z:$.CF;break;}}},function(n,t,e){for($._Dd=$.z;$._Dd<$.GG;$._Dd+=$.Bc){switch($._Dd){case $.Fm:function j(n){for($._q=$.z;$._q<$.Bt;$._q+=$.Bc){switch($._q){case $.Bf:t.V(function(){w=t;});break;case $.Bc:var t=($.z,v.Q)(n);break;case $.z:($.z,o.bn)([d.e,d.a],($.z,i.N)());break;}}}break;case $.CH:function y(){for($._Cy=$.z;$._Cy<$.Bt;$._Cy+=$.Bc){switch($._Cy){case $.Bf:l=n[$.Jl](function(n){for($._y=$.z;$._y<$.Bf;$._y+=$.Bc){switch($._y){case $.Bc:return i[$.o]=f.Kn,i[$.Ju]=e+$.cJ,i[$.aa]=r+$.cJ,i[$.p]=u+$.cJ,i[$.q]=o+$.cJ,p(i);break;case $.z:var t=($.z,a[$.Dw])(n),e=t[$.Ju],r=t[$.aa],u=t[$.bl],o=t[$.bm],i=$.$();break;}}}),m=setTimeout(y,f.Ln);break;case $.Bc:var n=($.z,a[$.Dx])(f.Yn)[$.Jq](function(n){for($._Cq=$.z;$._Cq<$.Bf;$._Cq+=$.Bc){switch($._Cq){case $.Bc:return!f.Zn[$.eA](function(n){return[t,e][$.Jt](f.$n)===n;});break;case $.z:var t=n[$.bl],e=n[$.bm];break;}}});break;case $.z:b();break;}}}break;case $.Fv:function _(n,t){for($._m=$.z;$._m<$.Bf;$._m+=$.Bc){switch($._m){case $.Bc:return Math[$.Iw](r);break;case $.z:var e=t-n,r=Math[$.BD]()*e+n;break;}}}break;case $.Bt:var l=[],w=void $.z,h=void $.z,m=void $.z;break;case $.Fl:function g(n){return n[_($.z,n[$.Gq])];}break;case $.Fi:function b(){l=l[$.Jq](function(n){return n[$.Bx]&&n[$.Bx][$.bB](n),!$.Bc;}),m&&clearTimeout(m);}break;case $.Bf:var r,u=e($.GC),c=(r=u)&&r[$.Bq]?r:$.$($.Bw,r),a=e($.Fv),f=e($.GD),s=e($.GE),d=e($.z),o=e($.Fl),i=e($.Bc),v=e($.CH);break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z)),t.gt=y,t.jt=b,t.Mt=p,t.Ot=j,t.pt=function(o){for($._Da=$.z;$._Da<$.CH;$._Da+=$.Bc){switch($._Da){case $.Bt:j(o),h=function(n){($.z,s.Tt)()&&(n&&n[$.eG]&&($.z,a[$.Dz])(n[$.eG])||(n[$.cp](),n[$.cq](),b(),(document[$.c]||document[$.j])[$.n](i[$.by])));},window[$.B](f.ut,h,f.it),i[$.Hx][$.B](f.ot,function(n){for($._CI=$.z;$._CI<$.Bf;$._CI+=$.Bc){switch($._CI){case $.Bc:($.z,s.St)(),n[$.cp](),n[$.cq](),n[$.cr](),w&&w()?j(o):($.z,c[$.Bw])(t,e,r,u,!$.z),i[$.by][$.db]();break;case $.z:var t=$.BF+i[$.Hx][$.cd],e=d._&&d._[$.ef]&&d._[$.ef][$.et],r=d._&&d._[$.ef]&&d._[$.ef][$.eu],u=d._&&d._[$.ef]&&d._[$.ef][$.ev];break;}}},f.it);break;case $.Bc:($.z,s.Tt)(n)&&y();break;case $.Bf:var i=function(n){for($._BA=$.z;$._BA<$.Ft;$._BA+=$.Bc){switch($._BA){case $.Fi:return i[$.by]=r,i[$.Hx]=o,i;break;case $.Bf:var o=r[$.J]($.Bo)[$.z];break;case $.Bt:o[$.bx]=f.tt,o[$.l][$.o]=$.ck,o[$.l][$.Gt]=_($.dB,$.dC),o[$.l][$.p]=_($.dd,$.de)+$.dA,o[$.l][$.q]=_($.dd,$.de)+$.dA,o[$.l][$.Ju]=_($.z,$.CH)+$.cJ,o[$.l][$.cb]=_($.z,$.CH)+$.cJ,o[$.l][$.aa]=_($.z,$.CH)+$.cJ,o[$.l][$.cc]=_($.z,$.CH)+$.cJ;break;case $.Bc:r[$.Bp]=u;break;case $.CH:var i=$.$();break;case $.z:var t=g(f.et),e=g(f.rt),r=document[$.A](t),u=e[$.Bh]($.ch,n);break;}}}(o);break;case $.z:var n=new Date()[$.bG]();break;}}},t._t=function(){for($._p=$.z;$._p<$.Bf;$._p+=$.Bc){switch($._p){case $.Bc:b();break;case $.z:h&&window[$.C](f.ut,h,f.it);break;}}},t.bt=function(){return void $.z===h;};break;case $.Ft:function p(t){for($._Ba=$.z;$._Ba<$.Bf;$._Ba+=$.Bc){switch($._Ba){case $.Bc:return Object[$.Jm](t)[$.k](function(n){e[$.l][n]=t[n];}),(document[$.c]||document[$.j])[$.n](e),e;break;case $.z:var e=f.Wn[$.CD](f.ct);break;}}}break;case $.z:$.CF;break;}}},function(n,t,e){for($._Cd=$.z;$._Cd<$.Bt;$._Cd+=$.Bc){switch($._Cd){case $.Bf:var r,u=e($.GF),a=(r=u)&&r[$.Bq]?r:$.$($.Bw,r);break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z)),t[$.Bw]=function(t,n,e,r,u){for($._Bz=$.z;$._Bz<$.Bf;$._Bz+=$.Bc){switch($._Bz){case $.Bc:return setTimeout(function(){for($._Bn=$.z;$._Bn<$.Bt;$._Bn+=$.Bc){switch($._Bn){case $.Bf:if(u)try{c[$.cB]=null;}catch(n){}break;case $.Bc:try{c[$.v][$.cA]=t;}catch(n){window[$.at](t,i);}break;case $.z:try{if(c[$.bd])throw new Error();}catch(n){return;}break;}}},n||$.au),c;break;case $.z:var o=e||($.z,a[$.Bw])(r),i=Math[$.BD]()[$.BG]($.Ba)[$.Bd]($.Bf),c=window[$.at](o,i);break;}}};break;case $.z:$.CF;break;}}},function(n,t,e){for($._Ck=$.z;$._Ck<$.CH;$._Ck+=$.Bc){switch($._Ck){case $.Bt:var o=$.Cd,f=new g($.GH,$.Bg),s=new g($.GI,$.Bg);break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z)),t[$.Bw]=function(i){for($._Cb=$.z;$._Cb<$.CH;$._Cb+=$.Bc){switch($._Cb){case $.Bt:return r||u||o;break;case $.Bc:t[$.aE](function(n,t){try{for($._BF=$.z;$._BF<$.Bf;$._BF+=$.Bc){switch($._BF){case $.Bc:return u===o?$.z:o<u?-$.Bc:$.Bc;break;case $.z:var e=n[$.ar](),r=t[$.ar](),u=e[$.p]*e[$.q],o=r[$.p]*r[$.q];break;}}}catch(n){return $.z;}});break;case $.Bf:var e=t[$.Jq](function(n){for($._Bf=$.z;$._Bf<$.Bf;$._Bf+=$.Bc){switch($._Bf){case $.Bc:return e||r||u;break;case $.z:var t=[][$.Bd][$.Bb](n[$.eC])[$.Jt]($.co),e=f[$.JD](n.id),r=f[$.JD](n[$.h]),u=f[$.JD](t);break;}}}),r=$.z<e[$.Gq]?e[$.z][$.h]:$.BF,u=$.z<t[$.Gq]?t[$.z][$.h]:$.BF;break;case $.z:var c=($.z,a[$.Bw])(window[$.cA][$.cd]),n=document[$.E]($.bJ),t=[][$.Bd][$.Bb](n)[$.Jq](function(n){for($._Bu=$.z;$._Bu<$.Bf;$._Bu+=$.Bc){switch($._Bu){case $.Bc:return u&&!r&&!o;break;case $.z:var t=($.z,a[$.Bw])(n[$.h]),e=t[$.eI]()===c[$.eI](),r=-$.Bc<n[$.h][$.Jk]($.ek),u=e||!i,o=s[$.JD](n[$.h]);break;}}});break;}}};break;case $.Bf:var r,u=e($.GG),a=(r=u)&&r[$.Bq]?r:$.$($.Bw,r);break;case $.z:$.CF;break;}}},function(n,t,e){for($._Ed=$.z;$._Ed<$.Fv;$._Ed+=$.Bc){switch($._Ed){case $.Fi:function v(){for($._u=$.z;$._u<$.Fi;$._u+=$.Bc){switch($._u){case $.Bt:var t=n[$.Gw](i.H),e=c(t,$.Bt),r=e[$.z],u=e[$.Bc],o=e[$.Bf];break;case $.Bc:try{n=h[f]||$.BF;}catch(n){}break;case $.CH:return[parseInt(r,$.GG)||new Date()[$.bG](),parseInt(o,$.GG)||$.z,parseInt(u,$.GG)||$.z];break;case $.Bf:try{n||(n=sessionStorage[f]||$.BF);}catch(n){}break;case $.z:var n=void $.z;break;}}}break;case $.Bf:var c=function(n,t){for($._EI=$.z;$._EI<$.Bt;$._EI+=$.Bc){switch($._EI){case $.Bf:throw new TypeError($.JG);break;case $.Bc:if(Symbol[$.Ji]in Object(n))return function(n,t){for($._EE=$.z;$._EE<$.Bt;$._EE+=$.Bc){switch($._EE){case $.Bf:return e;break;case $.Bc:try{for(var i,c=n[Symbol[$.Ji]]();!(r=(i=c[$.ex]())[$.fC])&&(e[$.aJ](i[$.Ic]),!t||e[$.Gq]!==t);r=!$.z);}catch(n){u=!$.z,o=n;}finally{try{!r&&c[$.fk]&&c[$.fk]();}finally{if(u)throw o;}}break;case $.z:var e=[],r=!$.z,u=!$.Bc,o=void $.z;break;}}}(n,t);break;case $.z:if(Array[$.JJ](n))return n;break;}}};break;case $.Bt:t.Tt=function(){for($._Bh=$.z;$._Bh<$.Fi;$._Bh+=$.Bc){switch($._Bh){case $.Bt:if(o&&i)return!$.z;break;case $.Bc:if(e+s<new Date()[$.bG]())return l(new Date()[$.bG](),$.z,$.z),$.z<a.v;break;case $.CH:return!$.Bc;break;case $.Bf:var o=u<a.v,i=r+d<new Date()[$.bG]();break;case $.z:var n=v(),t=c(n,$.Bt),e=t[$.z],r=t[$.Bc],u=t[$.Bf];break;}}},t.St=function(){for($._k=$.z;$._k<$.Bf;$._k+=$.Bc){switch($._k){case $.Bc:l(e,new Date()[$.bG](),r+$.Bc);break;case $.z:var n=v(),t=c(n,$.Bt),e=t[$.z],r=t[$.Bf];break;}}};break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z));break;case $.Ft:function l(n,t,e){for($._l=$.z;$._l<$.Bt;$._l+=$.Bc){switch($._l){case $.Bf:try{sessionStorage[f]=r;}catch(n){}break;case $.Bc:try{h[f]=r;}catch(n){}break;case $.z:var r=[n,e,t][$.Jt](i.H);break;}}}break;case $.CH:var r=e($.GJ),i=e($.Bt),a=e($.z),f=$.Eq+a.e+$.Jv,s=a.w*r.At,d=a.h*r.kt;break;case $.z:$.CF;break;}}},function(n,t,e){for($._H=$.z;$._H<$.Bt;$._H+=$.Bc){switch($._H){case $.Bf:t.kt=$.IH,t.At=$.II;break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z));break;case $.z:$.CF;break;}}},function(n,t,e){for($._Dy=$.z;$._Dy<$.Fi;$._Dy+=$.Bc){switch($._Dy){case $.Bt:function o(n){for($._Dw=$.z;$._Dw<$.Bf;$._Dw+=$.Bc){switch($._Dw){case $.Bc:o!==l&&o!==w||(t===h?(s[$.bq]=m,s[$.di]=v.g,s[$.bu]=v.e,s[$.dj]=v.a):t!==y||!i||a&&!f||(s[$.bq]=b,s[$.bs]=i,($.z,d.Bn)(e,c,u,r)[$.bf](function(n){for($._De=$.z;$._De<$.Bf;$._De+=$.Bc){switch($._De){case $.Bc:t[$.bq]=_,t[$.bp]=e,t[$.bs]=i,t[$.Di]=n,g(o,t);break;case $.z:var t=$.$();break;}}})[$.eg](function(n){for($._Dp=$.z;$._Dp<$.Bf;$._Dp+=$.Bc){switch($._Dp){case $.Bc:t[$.bq]=p,t[$.bp]=e,t[$.bs]=i,t[$.Dg]=n&&n[$.Gm],g(o,t);break;case $.z:var t=$.$();break;}}})),s[$.bq]&&g(o,s));break;case $.z:var e=n&&n[$.Di]&&n[$.Di][$.bp],t=n&&n[$.Di]&&n[$.Di][$.bq],r=n&&n[$.Di]&&n[$.Di][$.c],u=n&&n[$.Di]&&n[$.Di][$.br],o=n&&n[$.Di]&&n[$.Di][$.Iy],i=n&&n[$.Di]&&n[$.Di][$.bs],c=n&&n[$.Di]&&n[$.Di][$.bt],a=n&&n[$.Di]&&n[$.Di][$.bu],f=a===v.e||a===v.a,s=$.$();break;}}}break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z)),t[$.Bw]=function(){for($._BE=$.z;$._BE<$.Bf;$._BE+=$.Bc){switch($._BE){case $.Bc:window[$.B]($.Gm,o);break;case $.z:try{(r=new BroadcastChannel(l))[$.B]($.Gm,o),(u=new BroadcastChannel(w))[$.B]($.Gm,o);}catch(n){}break;}}};break;case $.CH:function g(n,t){for($._s=$.z;$._s<$.Bf;$._s+=$.Bc){switch($._s){case $.Bc:window[$.Ix](t,$.Jn);break;case $.z:switch(t[$.Iy]=n){case w:u[$.Ix](t);break;case l:default:r[$.Ix](t);}break;}}}break;case $.Bf:var d=e($.Fx),v=e($.z),l=$.Ce,w=$.Cf,h=$.Cg,m=$.Ch,y=$.Ci,b=$.Cj,p=$.Ck,_=$.Cl,r=void $.z,u=void $.z;break;case $.z:$.CF;break;}}},function(n,t,r){for($._Ei=$.z;$._Ei<$.Fv;$._Ei+=$.Bc){switch($._Ei){case $.Fi:function j(n){return e(c(n)[$.Gw]($.BF)[$.Jl](function(n){return $.dA+($.HI+n[$.av]($.z)[$.BG]($.Ga))[$.Bd](-$.Bf);})[$.Jt]($.BF));}break;case $.Bf:var b=$.Fc==typeof Symbol&&$.Js==typeof Symbol[$.Ji]?function(n){return typeof n;}:function(n){return n&&$.Fc==typeof Symbol&&n[$.ez]===Symbol&&n!==Symbol[$.Bj]?$.Js:typeof n;};break;case $.Bt:t.qn=function(n,i){return new f[$.Bw](function(r,u){for($._ED=$.z;$._ED<$.Bf;$._ED+=$.Bc){switch($._ED){case $.Bc:o[$.cd]=n,o[$.bx]=p.ft,o[$.bq]=p.dt,o[$.ce]=p.st,document[$.CB][$.cn](o,document[$.CB][$.Bs]),o[$.cH]=function(){for($._Dz=$.z;$._Dz<$.Bf;$._Dz+=$.Bc){switch($._Dz){case $.Bc:var t,e;break;case $.z:try{for($._Dq=$.z;$._Dq<$.Bf;$._Dq+=$.Bc){switch($._Dq){case $.Bc:o[$.Bx][$.bB](o),i===_.mt?r(M(n)):r(j(n));break;case $.z:var n=(t=o[$.cd],((e=Array[$.Bj][$.Bd][$.Bb](document[$.fA])[$.Jq](function(n){return n[$.cd]===t;})[$.ag]()[$.fb])[$.z][$.fc][$.fd]($.fg)?e[$.z][$.l][$.fj]:e[$.Bf][$.l][$.fj])[$.Bd]($.Bc,-$.Bc));break;}}}catch(n){u();}break;}}},o[$.Gn]=function(){o[$.Bx][$.bB](o),u();};break;case $.z:var o=document[$.A](p.at);break;}}});},t.Rn=function(t,w){return new f[$.Bw](function(v,n){for($._Eh=$.z;$._Eh<$.Bf;$._Eh+=$.Bc){switch($._Eh){case $.Bc:l[$.ce]=$.cl,l[$.h]=t,l[$.cH]=function(){for($._Eb=$.z;$._Eb<$.Fv;$._Eb+=$.Bc){switch($._Eb){case $.Fi:var f=d(o[$.Jt]($.BF)[$.ej]($.z,u)),s=w===_.mt?M(f):j(f);break;case $.Bf:var t=n[$.dy]($.eE);break;case $.Bt:t[$.dm](l,$.z,$.z);break;case $.Bc:n[$.p]=l[$.p],n[$.q]=l[$.q];break;case $.Ft:return v(s);break;case $.CH:for(var e=t[$.dz]($.z,$.z,l[$.p],l[$.q]),r=e[$.Di],u=r[$.Bd]($.z,$.Fy)[$.Jq](function(n,t){return(t+$.Bc)%$.CH;})[$.Jp]()[$.dg](function(n,t,e){return n+t*Math[$.eh]($.fa,e);},$.z),o=[],c=$.Fy;c<r[$.Gq];c++)if((c+$.Bc)%$.CH){for($._EH=$.z;$._EH<$.Bf;$._EH+=$.Bc){switch($._EH){case $.Bc:(w===_.mt||$.fm<=a)&&o[$.aJ](i[$.Dv](a));break;case $.z:var a=r[c];break;}}}break;case $.z:var n=document[$.A]($.eD);break;}}},l[$.Gn]=function(){return n();};break;case $.z:var l=new Image();break;}}});},t.Un=function(u,o){for($._EA=$.z;$._EA<$.Bf;$._EA+=$.Bc){switch($._EA){case $.Bc:return new f[$.Bw](function(t,e){for($._Dv=$.z;$._Dv<$.Bf;$._Dv+=$.Bc){switch($._Dv){case $.Bc:if(r[$.at](c,u),r[$.bt]=i,r[$.cG]=!$.z,r[$.cE](_.vt,d(encodeURI(o))),r[$.cH]=function(){for($._DH=$.z;$._DH<$.Bf;$._DH+=$.Bc){switch($._DH){case $.Bc:n[$.dp]=r[$.dp],n[$.Cl]=i===_.ht?JSON[$.em](r[$.Cl]):r[$.Cl],$.z<=[$.dr,$.ds][$.Jk](r[$.dp])?t(n):e(new Error($.eJ+r[$.dp]+$.co+r[$.en]+$.es+o));break;case $.z:var n=$.$();break;}}},r[$.Gn]=function(){e(new Error($.eJ+r[$.dp]+$.co+r[$.en]+$.es+o));},c===_.yt){for($._Dr=$.z;$._Dr<$.Bf;$._Dr+=$.Bc){switch($._Dr){case $.Bc:r[$.cE](_.lt,_.wt),r[$.cz](n);break;case $.z:var n=$.dh===(void $.z===a?$.CG:b(a))?JSON[$.em](a):a;break;}}}else r[$.cz]();break;case $.z:var r=new window[$.ci]();break;}}});break;case $.z:var i=$.Bf<arguments[$.Gq]&&void $.z!==arguments[$.Bf]?arguments[$.Bf]:_.ht,c=$.Bt<arguments[$.Gq]&&void $.z!==arguments[$.Bt]?arguments[$.Bt]:_.Nn,a=$.CH<arguments[$.Gq]&&void $.z!==arguments[$.CH]?arguments[$.CH]:$.$();break;}}},t.zn=function(t,w){for($._EC=$.z;$._EC<$.Bf;$._EC+=$.Bc){switch($._EC){case $.Bc:return new f[$.Bw](function(o,i){for($._Dx=$.z;$._Dx<$.Bt;$._Dx+=$.Bc){switch($._Dx){case $.Bf:window[$.B]($.Gm,n),f[$.h]=t,(document[$.c]||document[$.j])[$.n](f),v=setTimeout(l,p.Xn);break;case $.Bc:function n(n){for($._Du=$.z;$._Du<$.Bf;$._Du+=$.Bc){switch($._Du){case $.Bc:if(t===a)if(null===n[$.Di][t]){for($._DG=$.z;$._DG<$.Bf;$._DG+=$.Bc){switch($._DG){case $.Bc:e[t]=$.$($.ep,$.eq,$.bp,d(encodeURI(w)),$.br,m,$.c,$.dh===(void $.z===y?$.CG:b(y))?JSON[$.em](y):y),m===_.yt&&(e[t][$.fE]=JSON[$.em]($.$($.Cm,_.wt))),f[$.u][$.Ix](e,$.Jn);break;case $.z:var e=$.$();break;}}}else{for($._Dt=$.z;$._Dt<$.Bt;$._Dt+=$.Bc){switch($._Dt){case $.Bf:r[$.dp]=u[$.fh],r[$.Cl]=h===_.mt?M(u[$.c]):j(u[$.c]),$.z<=[$.dr,$.ds][$.Jk](r[$.dp])?o(r):i(new Error($.eJ+r[$.dp]+$.es+w));break;case $.Bc:var r=$.$(),u=JSON[$.fe](c(n[$.Di][t]));break;case $.z:s=!$.z,l(),clearTimeout(v);break;}}}break;case $.z:var t=Object[$.Jm](n[$.Di])[$.ag]();break;}}}break;case $.z:var a=($.z,g.Y)(t),f=($.z,g.Z)(),s=!$.Bc,v=void $.z,l=function(){try{f[$.Bx][$.bB](f),window[$.C]($.Gm,n),s||i(new Error($.eB));}catch(n){}};break;}}});break;case $.z:var h=$.Bf<arguments[$.Gq]&&void $.z!==arguments[$.Bf]?arguments[$.Bf]:_.ht,m=$.Bt<arguments[$.Gq]&&void $.z!==arguments[$.Bt]?arguments[$.Bt]:_.Nn,y=$.CH<arguments[$.Gq]&&void $.z!==arguments[$.CH]?arguments[$.CH]:$.$();break;}}};break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z));break;case $.Ft:function M(n){for($._z=$.z;$._z<$.Bf;$._z+=$.Bc){switch($._z){case $.Bc:return new Uint8Array(t)[$.Jl](function(n,t){return e[$.av](t);});break;case $.z:var e=c(n),t=new ArrayBuffer(e[$.Gq]);break;}}}break;case $.CH:var u,p=r($.GD),_=r($.Fo),g=r($.CH),o=r($.Ga),f=(u=o)&&u[$.Bq]?u:$.$($.Bw,u);break;case $.z:$.CF;break;}}},function(n,t,e){(function(o){!function(s,d){for($._Em=$.z;$._Em<$.Fi;$._Em+=$.Bc){switch($._Em){case $.Bt:function i(t){return l(function(n){n(t);});}break;case $.Bc:function l(a,f){return(f=function e(r,u,o,i,c,n){for($._Ek=$.z;$._Ek<$.CH;$._Ek+=$.Bc){switch($._Ek){case $.Bt:function t(t){return function(n){c&&(c=$.z,e(v,t,n));};}break;case $.Bc:if(o&&v(s,o)|v(d,o))try{c=o[$.bf];}catch(n){u=$.z,o=n;}break;case $.Bf:if(v(s,c))try{c[$.Bb](o,t($.Bc),u=t($.z));}catch(n){u(n);}else for(f=function(e,n){return v(s,e=u?e:n)?l(function(n,t){w(this,n,t,o,e);}):a;},n=$.z;n<i[$.Gq];)c=i[n++],v(s,r=c[u])?w(c.p,c.r,c.j,o,r):(u?c.r:c.j)(o);break;case $.z:if(i=e.q,r!=v)return l(function(n,t){i[$.aJ]($.$($.Ib,this,$.ey,n,$.IJ,t,$.Bc,r,$.z,u));});break;}}}).q=[],a[$.Bb](a=$.$($.bf,function(n,t){return f(n,t);},$.eg,function(n){return f($.z,n);}),function(n){f(v,$.Bc,n);},function(n){f(v,$.z,n);}),a;}break;case $.CH:(n[$.BH]=l)[$.bn]=i,l[$.ao]=function(e){return l(function(n,t){t(e);});},l[$.ap]=function(n){return l(function(e,r,u,o){o=[],u=n[$.Gq]||e(o),n[$.Jl](function(n,t){i(n)[$.bf](function(n){o[t]=n,--u||e(o);},r);});});},l[$.aq]=function(n){return l(function(t,e){n[$.Jl](function(n){i(n)[$.bf](t,e);});});};break;case $.Bf:function w(n,t,e,r,u){o(function(){try{u=(r=u(r))&&v(d,r)|v(s,r)&&r[$.bf],v(s,u)?r==n?e(TypeError()):u[$.Bb](r,t,e):t(r);}catch(n){e(n);}});}break;case $.z:function v(n,t){return(typeof t)[$.z]==n;}break;}}}($.Cp,$.fv);}[$.Bb](t,e($.fw)[$.Jg]));},function(n,u,o){(function(n){for($._Cn=$.z;$._Cn<$.Bt;$._Cn+=$.Bc){switch($._Cn){case $.Bf:u[$.Ja]=function(){return new r(e[$.Bb](setTimeout,t,arguments),clearTimeout);},u[$.Jb]=function(){return new r(e[$.Bb](setInterval,t,arguments),clearInterval);},u[$.Jc]=u[$.ah]=function(n){n&&n[$.aA]();},r[$.Bj][$.Jz]=r[$.Bj][$.bg]=function(){},r[$.Bj][$.aA]=function(){this[$.al][$.Bb](t,this[$.ak]);},u[$.Jd]=function(n,t){clearTimeout(n[$.bv]),n[$.bh]=t;},u[$.Je]=function(n){clearTimeout(n[$.bv]),n[$.bh]=-$.Bc;},u[$.Jf]=u[$.ai]=function(n){for($._Cc=$.z;$._Cc<$.Bt;$._Cc+=$.Bc){switch($._Cc){case $.Bf:$.z<=t&&(n[$.bv]=setTimeout(function(){n[$.ee]&&n[$.ee]();},t));break;case $.Bc:var t=n[$.bh];break;case $.z:clearTimeout(n[$.bv]);break;}}},o($.JB),u[$.Jg]=$.CG!=typeof self&&self[$.Jg]||void $.z!==n&&n[$.Jg]||this&&this[$.Jg],u[$.Jh]=$.CG!=typeof self&&self[$.Jh]||void $.z!==n&&n[$.Jh]||this&&this[$.Jh];break;case $.Bc:function r(n,t){this[$.ak]=n,this[$.al]=t;}break;case $.z:var t=void $.z!==n&&n||$.CG!=typeof self&&self||window,e=Function[$.Bj][$.Bu];break;}}}[$.Bb](u,o($.fI)));},function(n,t,e){(function(n,w){!function(e,r){for($._Et=$.z;$._Et<$.CH;$._Et+=$.Bc){switch($._Et){case $.Bt:function l(n){if(f)setTimeout(l,$.z,n);else{for($._DA=$.z;$._DA<$.Bf;$._DA+=$.Bc){switch($._DA){case $.Bc:if(t){for($._Cz=$.z;$._Cz<$.Bf;$._Cz+=$.Bc){switch($._Cz){case $.Bc:try{!function(n){for($._CD=$.z;$._CD<$.Bf;$._CD+=$.Bc){switch($._CD){case $.Bc:switch(e[$.Gq]){case $.z:t();break;case $.Bc:t(e[$.z]);break;case $.Bf:t(e[$.z],e[$.Bc]);break;case $.Bt:t(e[$.z],e[$.Bc],e[$.Bf]);break;default:t[$.Bu](r,e);}break;case $.z:var t=n[$.dt],e=n[$.du];break;}}}(t);}finally{v(n),f=!$.Bc;}break;case $.z:f=!$.z;break;}}}break;case $.z:var t=a[n];break;}}}}break;case $.Bc:if(!e[$.Jg]){for($._Es=$.z;$._Es<$.Bf;$._Es+=$.Bc){switch($._Es){case $.Bc:d=d&&d[$.Ja]?d:e,$.bi===$.$()[$.BG][$.Bb](e[$.df])?u=function(n){w[$.Er](function(){l(n);});}:!function(){if(e[$.Ix]&&!e[$.fJ]){for($._Dj=$.z;$._Dj<$.Bf;$._Dj+=$.Bc){switch($._Dj){case $.Bc:return e[$.ff]=function(){n=!$.Bc;},e[$.Ix]($.BF,$.Jn),e[$.ff]=t,n;break;case $.z:var n=!$.z,t=e[$.ff];break;}}}}()?e[$.fl]?((t=new MessageChannel())[$.fo][$.ff]=function(n){l(n[$.Di]);},u=function(n){t[$.fp][$.Ix](n);}):s&&$.fu in s[$.A]($.Cv)?(o=s[$.j],u=function(n){for($._Eo=$.z;$._Eo<$.Bf;$._Eo+=$.Bc){switch($._Eo){case $.Bc:t[$.fu]=function(){l(n),t[$.fu]=null,o[$.bB](t),t=null;},o[$.n](t);break;case $.z:var t=s[$.A]($.Cv);break;}}}):u=function(n){setTimeout(l,$.z,n);}:(i=$.fy+Math[$.BD]()+$.gA,n=function(n){n[$.fz]===e&&$.gC==typeof n[$.Di]&&$.z===n[$.Di][$.Jk](i)&&l(+n[$.Di][$.Bd](i[$.Gq]));},e[$.B]?e[$.B]($.Gm,n,!$.Bc):e[$.gB]($.ff,n),u=function(n){e[$.Ix](i+n,$.Jn);}),d[$.Jg]=function(n){for($._Cw=$.z;$._Cw<$.CH;$._Cw+=$.Bc){switch($._Cw){case $.Bt:return a[c]=r,u(c),c++;break;case $.Bc:for(var t=new Array(arguments[$.Gq]-$.Bc),e=$.z;e<t[$.Gq];e++)t[e]=arguments[e+$.Bc];break;case $.Bf:var r=$.$($.dt,n,$.du,t);break;case $.z:$.Fc!=typeof n&&(n=new Function($.BF+n));break;}}},d[$.Jh]=v;break;case $.z:var u,o,t,i,n,c=$.Bc,a=$.$(),f=!$.Bc,s=e[$.v],d=Object[$.ca]&&Object[$.ca](e);break;}}}break;case $.Bf:function v(n){delete a[n];}break;case $.z:$.CF;break;}}}($.CG==typeof self?void $.z===n?this:n:self);}[$.Bb](t,e($.fI),e($.fm)));},function(n,t){for($._Cx=$.z;$._Cx<$.Fx;$._Cx+=$.Bc){switch($._Cx){case $.Fm:function h(){}break;case $.CH:!function(){for($._BD=$.z;$._BD<$.Bf;$._BD+=$.Bc){switch($._BD){case $.Bc:try{r=$.Fc==typeof clearTimeout?clearTimeout:i;}catch(n){r=i;}break;case $.z:try{e=$.Fc==typeof setTimeout?setTimeout:o;}catch(n){e=o;}break;}}}();break;case $.Fv:function l(){if(!s){for($._Cr=$.z;$._Cr<$.CH;$._Cr+=$.Bc){switch($._Cr){case $.Bt:a=null,s=!$.Bc,function(t){for($._Ce=$.z;$._Ce<$.Bt;$._Ce+=$.Bc){switch($._Ce){case $.Bf:try{r(t);}catch(n){try{return r[$.Bb](null,t);}catch(n){return r[$.Bb](this,t);}}break;case $.Bc:if((r===i||!r)&&clearTimeout)return r=clearTimeout,clearTimeout(t);break;case $.z:if(r===clearTimeout)return clearTimeout(t);break;}}}(n);break;case $.Bc:s=!$.z;break;case $.Bf:for(var t=f[$.Gq];t;){for($._CG=$.z;$._CG<$.Bf;$._CG+=$.Bc){switch($._CG){case $.Bc:d=-$.Bc,t=f[$.Gq];break;case $.z:for(a=f,f=[];++d<t;)a&&a[d][$.Gv]();break;}}}break;case $.z:var n=c(v);break;}}}}break;case $.Bt:function c(t){for($._Bw=$.z;$._Bw<$.Bt;$._Bw+=$.Bc){switch($._Bw){case $.Bf:try{return e(t,$.z);}catch(n){try{return e[$.Bb](null,t,$.z);}catch(n){return e[$.Bb](this,t,$.z);}}break;case $.Bc:if((e===o||!e)&&setTimeout)return e=setTimeout,setTimeout(t,$.z);break;case $.z:if(e===setTimeout)return setTimeout(t,$.z);break;}}}break;case $.Fl:function w(n,t){this[$.JH]=n,this[$.JI]=t;}break;case $.Fi:var a,f=[],s=!$.Bc,d=-$.Bc;break;case $.Bf:function i(){throw new Error($.Gy);}break;case $.Bc:function o(){throw new Error($.Gx);}break;case $.GG:u[$.Er]=function(n){for($._CB=$.z;$._CB<$.Bt;$._CB+=$.Bc){switch($._CB){case $.Bf:f[$.aJ](new w(n,t)),$.Bc!==f[$.Gq]||s||c(l);break;case $.Bc:if($.Bc<arguments[$.Gq])for(var e=$.Bc;e<arguments[$.Gq];e++)t[e-$.Bc]=arguments[e];break;case $.z:var t=new Array(arguments[$.Gq]-$.Bc);break;}}},w[$.Bj][$.Gv]=function(){this[$.JH][$.Bu](null,this[$.JI]);},u[$.Es]=$.Et,u[$.Et]=!$.z,u[$.Eu]=$.$(),u[$.Ev]=[],u[$.Ew]=$.BF,u[$.Ex]=$.$(),u.on=h,u[$.Ey]=h,u[$.Ez]=h,u[$.FA]=h,u[$.FB]=h,u[$.FC]=h,u[$.FD]=h,u[$.FE]=h,u[$.FF]=h,u[$.FG]=function(n){return[];},u[$.FH]=function(n){throw new Error($.aF);},u[$.FI]=function(){return $.Iz;},u[$.FJ]=function(n){throw new Error($.aG);},u[$.Fa]=function(){return $.z;};break;case $.Ft:function v(){s&&a&&(s=!$.Bc,a[$.Gq]?f=a[$.bw](f):d=-$.Bc,f[$.Gq]&&l());}break;case $.z:var e,r,u=n[$.BH]=$.$();break;}}},function(n,t,e){for($._Ee=$.z;$._Ee<$.Fl;$._Ee+=$.Bc){switch($._Ee){case $.Fv:a.Nt=$.Cq,a.qt=$.Cu,a.Ct=$.IJ,a.Dt=$.Ia,a.Rt=$.Ib,a.Ut=$.Ht;break;case $.Bt:t.Cn=function(n,t){for($._v=$.z;$._v<$.Bf;$._v+=$.Bc){switch($._v){case $.Bc:h[i]=c+$.Bc,h[u]=new Date()[$.bG](),h[o]=$.BF;break;case $.z:var e=x(n,t),r=j(e,$.Bt),u=r[$.z],o=r[$.Bc],i=r[$.Bf],c=parseInt(h[i],$.GG)||$.z;break;}}},t.Dn=function(n,t,e){for($._Cv=$.z;$._Cv<$.Bt;$._Cv+=$.Bc){switch($._Cv){case $.Bf:var b,p,_,g;break;case $.Bc:if(h[o]&&!h[i]){for($._Cs=$.z;$._Cs<$.CH;$._Cs+=$.Bc){switch($._Cs){case $.Bt:b=y,p=$.dc+($.z,O.N)()+$.ei,_=Object[$.Jm](b)[$.Jl](function(n){for($._Ca=$.z;$._Ca<$.Bf;$._Ca+=$.Bc){switch($._Ca){case $.Bc:return[n,t][$.Jt]($.ew);break;case $.z:var t=f(b[n]);break;}}})[$.Jt]($.fH),(g=new window[$.ci]())[$.at]($.IG,p,!$.z),g[$.cE](T,S),g[$.cz](_);break;case $.Bc:h[i]=d,h[c]=$.z;break;case $.Bf:var y=$.$($.dD,n,$.dE,w,$.dF,v,$.dG,e,$.dH,d,$.fB,function(){for($._By=$.z;$._By<$.CH;$._By+=$.Bc){switch($._By){case $.Bt:return h[A]=t;break;case $.Bc:if(n)return n;break;case $.Bf:var t=Math[$.BD]()[$.BG]($.Ba)[$.Bd]($.Bf);break;case $.z:var n=h[A];break;}}}(),$.dI,m,$.dJ,s,$.da,a,$.dk,navigator[$.ct],$.dw,window[$.as][$.p],$.dx,window[$.as][$.q],$.br,t||k,$.eH,new Date()[$.bI](),$.ea,($.z,M[$.Bw])(e),$.eb,($.z,M[$.Bw])(w),$.ec,($.z,M[$.Bw])(m),$.ed,navigator[$.cv]||navigator[$.dv]);break;case $.z:var a=parseInt(h[c],$.GG)||$.z,s=parseInt(h[o],$.GG),d=new Date()[$.bG](),v=d-s,l=document,w=l[$.dE],m=window[$.cA][$.cd];break;}}}break;case $.z:var r=x(n,t),u=j(r,$.Bt),o=u[$.z],i=u[$.Bc],c=u[$.Bf];break;}}};break;case $.Fi:var T=$.Cm,S=$.Cn,A=$.Co,o=$.Cp,i=$.Cq,c=$.Cr,k=$.Cs,a=$.$();break;case $.Bf:var j=function(n,t){for($._EJ=$.z;$._EJ<$.Bt;$._EJ+=$.Bc){switch($._EJ){case $.Bf:throw new TypeError($.JG);break;case $.Bc:if(Symbol[$.Ji]in Object(n))return function(n,t){for($._EF=$.z;$._EF<$.Bt;$._EF+=$.Bc){switch($._EF){case $.Bf:return e;break;case $.Bc:try{for(var i,c=n[Symbol[$.Ji]]();!(r=(i=c[$.ex]())[$.fC])&&(e[$.aJ](i[$.Ic]),!t||e[$.Gq]!==t);r=!$.z);}catch(n){u=!$.z,o=n;}finally{try{!r&&c[$.fk]&&c[$.fk]();}finally{if(u)throw o;}}break;case $.z:var e=[],r=!$.z,u=!$.Bc,o=void $.z;break;}}}(n,t);break;case $.z:if(Array[$.JJ](n))return n;break;}}};break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z));break;case $.Ft:function x(n,t){for($._c=$.z;$._c<$.Bf;$._c+=$.Bc){switch($._c){case $.Bc:return[[A,r][$.Jt](e),[A,r,o][$.Jt](e),[A,r,i][$.Jt](e)];break;case $.z:var e=a[t]||c,r=parseInt(n,$.GG)[$.BG]($.Ba);break;}}}break;case $.CH:var r,u=e($.GG),M=(r=u)&&r[$.Bq]?r:$.$($.Bw,r),O=e($.Bc);break;case $.z:$.CF;break;}}},function(n,t,r){for($._Er=$.z;$._Er<$.Fi;$._Er+=$.Bc){switch($._Er){case $.Bt:function s(n){return n&&n[$.Bq]?n:$.$($.Bw,n);}break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z)),t[$.Bw]=function(v,l){for($._Eq=$.z;$._Eq<$.Bf;$._Eq+=$.Bc){switch($._Eq){case $.Bc:return($.z,o.Bn)(n)[$.bf](function(n){return(n=n&&$.Cl in n?n[$.Cl]:n)&&($.z,a.zt)(w.e,n),n;})[$.eg](function(){return($.z,a.Ht)(w.e);})[$.bf](function(n){for($._Ep=$.z;$._Ep<$.Bf;$._Ep+=$.Bc){switch($._Ep){case $.Bc:n&&(n=n[$.Bh](new RegExp($.e,$.Bl),(d=$.d+Math[$.BD]()[$.BG]($.Ba)[$.Bd]($.Bf),window[d]=c,d))[$.Bh](new RegExp($.f,$.Bl),(s=$.d+Math[$.BD]()[$.BG]($.Ba)[$.Bd]($.Bf),window[s]=e,s))[$.Bh](new RegExp($.BC,$.Bl),(r=$.d+Math[$.BD]()[$.BG]($.Ba)[$.Bd]($.Bf),window[r]=f,r))[$.Bh](new RegExp($.fx,$.Bl),(t=$.d+Math[$.BD]()[$.BG]($.Ba)[$.Bd]($.Bf),window[t]=i,t)),u=n,o=v,a=l,new b[$.Bw](function(n,t){for($._Ej=$.z;$._Ej<$.Fi;$._Ej+=$.Bc){switch($._Ej){case $.Bt:try{_[$.Bx][$.cn](e,_);}catch(n){(document[$.c]||document[$.j])[$.n](e);}break;case $.Bc:var e=document[$.A]($.Cv),r=document[$.i](u);break;case $.CH:setTimeout(function(){return e[$.Bx][$.bB](e),($.z,y.ln)(o)?(($.z,m[$.Ds])($.fq),n()):t();});break;case $.Bf:e[$.cH]=a,e[$.n](r),-$.Bc<[h.Mn,h.Tn,h.On][$.Jk](w.g)&&(e[$.fr]($.fs,w.e),e[$.fr]($.ft,($.z,p[$.Bw])(c(w.M))));break;case $.z:($.z,m[$.Ds])($.fn);break;}}}));break;case $.z:var u,o,a,t,r,s,d;break;}}});break;case $.z:var n=v===h._n?($.z,u[$.Dq])():c(w.M);break;}}};break;case $.CH:var _=document[$.a];break;case $.Bf:var w=r($.z),h=r($.Fm),m=r($.Bf),u=r($.Bc),o=r($.Fx),a=r($.Gb),y=r($.Fv),b=s(r($.Ga)),p=s(r($.GG));break;case $.z:$.CF;break;}}},function(n,t,e){for($._Ef=$.z;$._Ef<$.Ft;$._Ef+=$.Bc){switch($._Ef){case $.Fi:function f(n){for($._d=$.z;$._d<$.Bf;$._d+=$.Bc){switch($._d){case $.Bc:return[[r,t][$.Jt](o),[r,t][$.Jt](u)];break;case $.z:var t=parseInt(n,$.GG)[$.BG]($.Ba);break;}}}break;case $.Bf:var c=function(n,t){for($._Ea=$.z;$._Ea<$.Bt;$._Ea+=$.Bc){switch($._Ea){case $.Bf:throw new TypeError($.JG);break;case $.Bc:if(Symbol[$.Ji]in Object(n))return function(n,t){for($._EG=$.z;$._EG<$.Bt;$._EG+=$.Bc){switch($._EG){case $.Bf:return e;break;case $.Bc:try{for(var i,c=n[Symbol[$.Ji]]();!(r=(i=c[$.ex]())[$.fC])&&(e[$.aJ](i[$.Ic]),!t||e[$.Gq]!==t);r=!$.z);}catch(n){u=!$.z,o=n;}finally{try{!r&&c[$.fk]&&c[$.fk]();}finally{if(u)throw o;}}break;case $.z:var e=[],r=!$.z,u=!$.Bc,o=void $.z;break;}}}(n,t);break;case $.z:if(Array[$.JJ](n))return n;break;}}};break;case $.Bt:t.zt=function(n,t){for($._e=$.z;$._e<$.Bf;$._e+=$.Bc){switch($._e){case $.Bc:h[u]=$.z,h[o]=t;break;case $.z:var e=f(n),r=c(e,$.Bf),u=r[$.z],o=r[$.Bc];break;}}},t.Ht=function(n){for($._t=$.z;$._t<$.Bt;$._t+=$.Bc){switch($._t){case $.Bf:return h[r]=o+$.Bc,i;break;case $.Bc:{for($._r=$.z;$._r<$.Bf;$._r+=$.Bc){switch($._r){case $.Bc:if(!i)return null;break;case $.z:if(a<=o)return delete h[r],delete h[u],null;break;}}}break;case $.z:var t=f(n),e=c(t,$.Bf),r=e[$.z],u=e[$.Bc],o=parseInt(h[r],$.GG)||$.z,i=h[u];break;}}};break;case $.Bc:Object[$.BI](t,$.Bq,$.$($.Ic,!$.z));break;case $.CH:var r=$.Ct,u=$.Cu,o=$.Cr,a=$.Bt;break;case $.z:$.CF;break;}}}]);break;case $.CH:window[k]=document,[$.A,$.B,$.C,$.D,$.E,$.F,$.G,$.H,$.I,$.J][$.k](function(n){document[n]=function(){return b[$.u][$.v][n][$.Bu](window[$.v],arguments);};}),[$.a,$.b,$.c][$.k](function(n){Object[$.BI](document,n,$.$($.Bv,function(){return window[$.v][n];},$.Be,!$.Bc));}),document[$.i]=function(){return arguments[$.z]=arguments[$.z][$.Bh](new RegExp($.Bk,$.Bl),k),b[$.u][$.v][$.i][$.Bb](window[$.v],arguments[$.z]);};break;case $.Fv:try{window[$.f];}catch(n){delete window[$.f],window[$.f]=e;}break;case $.Bt:var k=$.d+Math[$.BD]()[$.BG]($.Ba)[$.Bd]($.Bf);break;case $.Fl:try{window[$.g];}catch(n){delete window[$.g],window[$.g]=g;}break;case $.Fi:try{h=window[$.t];}catch(n){delete window[$.t],window[$.t]=$.$($.Bm,$.$(),$.CC,function(n,t){return this[$.Bm][n]=i(t);},$.CE,function(n){return this[$.Bm][$.Bn](n)?this[$.Bm][n]:void $.z;},$.CA,function(n){return delete this[$.Bm][n];},$.Bz,function(){return this[$.Bm]=$.$();}),h=window[$.t];}break;case $.Bf:b[$.l][$.o]=$.w,b[$.l][$.p]=$.x,b[$.l][$.q]=$.x,b[$.l][$.r]=$.y,b[$.l][$.s]=$.z,b[$.h]=$.m,a[$.j][$.n](b),i=b[$.u][$.BA],c=b[$.u][$.e],d=b[$.u][$.BB],e=b[$.u][$.f],f=b[$.u][$.BC],g=b[$.u][$.g];break;case $.Bc:try{b=window[$.v][$.A]($.BE);}catch(n){for($._D=$.z;$._D<$.Bf;$._D+=$.Bc){switch($._D){case $.Bc:j[$.Bp]=$.Br,b=j[$.Bs];break;case $.z:var j=(a[$.a]?a[$.a][$.Bx]:a[$.c]||a[$.CB])[$.CD]();break;}}}break;case $.Ft:try{window[$.e];}catch(n){delete window[$.e],window[$.e]=c;}break;case $.z:var b,c,d,e,f,g,h,i,a=document;break;}}})((function(j,k){var f=String.fromCharCode;function H(index){return Number(index).toString(36).replace(/[0-9]/g,function(s){return f(parseInt(s,10)+65);});}var o={$:function(){var o={};for(var i=0;i<arguments.length;i+=2){o[arguments[i]]=arguments[i+1];}return o;}};j=j.split('+');for(var i=0;i<579;i++){(function(I){Object['defineProperty'](o,H(I),{get:function(){return j[I][0]!==';'?k(j[I],f):parseFloat(j[I].slice(1),10);}});}(i));}return o;}('=6lW:l./MlwlE:+W99./}lE:.bq#:lEl6+6lwo}l./}lE:.bq#:lEl6+*il6tRlMl=:o6+*il6tRlMl=:o6.PMM+9q#ZW:=3./}lE:+=6lW:l.Io=iwlE:.L6W^wlE:+=6lW:l./MlwlE:.gR+^l:./MlwlE:.!t.@9+^l:./MlwlE:#.!t(W^.gWwl+=i66lE:R=6qZ:+6lW9tR:W:l+5o9t+s+W:o5+9l=o9lvz.@.XowZoElE:+zl^./BZ+#6=+=6lW:l(lB:.go9l+9o=iwlE:./MlwlE:+Ho6./W=3+#:tMl+W5oi:.J5MWE~+WZZlE9.X3qM9+Zo#q:qoE+Nq9:3+3lq^3:+9q#ZMWt+oZW=q:t+Mo=WMR:o6W^l+=oE:lE:&qE9oN+9o=iwlE:+W5#oMi:l+._ZB+EoEl+;0+R:6qE^+5:oW+lE=o9lvz.@.XowZoElE:+6WE9ow+qH6Wwl++:oR:6qE^+lBZo6:#+9lHqEl.,6oZl6:t+;18+;36+=WMM+;1+#Mq=l+=oEHq^i6W5Ml+;2+q+6lZMW=l+M+Z6o:o:tZl+r5.t9o=iwlE:.Ar5+^+s9W:W+3W#.aNE.,6oZl6:t+W+qEEl6.F(.|.b+ssl#.|o9iMl+.CqH6Wwl.*#6=.G.#W5oi:.J5MWE~.#.2.C.4qH6Wwl.2+Hq6#:.X3qM9+;3+WZZMt+^l:+9lHWiM:+ZW6lE:.go9l+lEiwl6W5Ml+=MlW6+6lwo}l.@:lw+3lW9+#l:.@:lw+=MoEl.go9l+^l:.@:lw+i#l.*#:6q=:+iE9lHqEl9+;4+;48+;57+;97+;122+AH^Ho6wW:#+3::Z#.J.4.4NNN.)^oo^Ml.)=ow.4HW}q=oE.)q=o+i~3HoBA9o^*+~W3N3wEEq+ZqE^+ZoE^+6l*il#:+6l*il#:sW==lZ:l9+6l*il#:sHWqMl9+6l#ZoE#l+.XoE:lE:.1(tZl+WZZMq=W:qoE.4B.1NNN.1Ho6w.1i6MlE=o9l9.u.*=3W6#l:.Gv(.L.1.x+E6W.x=6.j.Q96^+H+#+i+iE~EoNE+w^95.Qo.[.Q^}+=+#=6qZ:+#=6qZ:#+}lE9o6+qE9lB+S*il6t+Mo9W#3+iE9l6#=o6l+WE^iMW6+6lW=:+#:tMl#+6l#l:+5iE9Ml+5oo:#:6WZ+S*il6t.1iq+Mo^o+qwW^l+56WE9+3lW9l6+q=oE+HW}q=oE+NW6EqE^+l66o6+#:W6+9W:W+=i#:ow+=oEHq^+WSWB+wlEi+W6:q=Ml#+6l#oi6=l#+}WMq9W:o6#+^l:.aE=Mq=~Rl=6l:v6M+^l:v#l9.|l:3o9#+W99v#l9.|l:3o9+^lEl6W:lzWE9ow.,.F.,v6M+:o.X3W6.Xo9l+H6ow.X3W6.Xo9l+^l:.aHH#l:+*il6t+:6W}l6#l.,W6lE:#+q#./B=Mi9l9+iE.!6oW9=W#:.@EHo+q#.boW9l9+^l:.Lo6wW:#+6iE.P.P.!+:6t(oZ+^l:.,W6lE:.go9l+Z#iHHqBl#+6WN+;768+;1024+;568+;360+;1080+;736+;900+;864+;812+;667+;800+;240+;300+lE.1vR+lE.1.D.!+lE.1.X.P+lE.1.Pv+#}.1R./+ss.,.,vsR./RR.@.a.gs._s+ElB:(q=~+:q:Ml+56oN#l6+lE}+W6^}+}l6#qoE+}l6#qoE#+W99.bq#:lEl6+oE=l+oHH+6lwo}l.bq#:lEl6+6lwo}l.PMM.bq#:lEl6#+lwq:+Z6lZlE9.bq#:lEl6+Z6lZlE9.aE=l.bq#:lEl6+Mq#:lEl6#+5qE9qE^+=N9+=39q6+iwW#~+:.j~9.[.T9.x=^l+HiE=:qoE+;60+;120+;480+;180+;720+;5+;19+;20+;8+;9+;28+;15+;33+]3::Z#.n.J+].4.4+].4+;6+;29+;7+;22+;11+;12+WE96oq9+NqE9oN#.*E:+;13+;23+;14+;25+;24+;10+.tMo^op56WE9.A+]5Mo5.J+;26+;16+;35+.aE.XMq=~+.,i#3.*Eo:qHq=W:qoE.*.t.F((.,.A+.,i#3.*Eo:qHq=W:qoE.*.t.F((.,R.A+.,i#3.*Eo:qHq=W:qoE.*.t.Ioi5Ml.*(W^.A+.@E:l6#:q:qWM+.gW:q}l+.@E.1.,W^l.*.,i#3+oE=Mq=~+EW:q}l+Zi#3l6.1iEq}l6#WM+wl##W^l+oEl66o6+.,6owq#l+Z~lt#+MlE^:3+:ElwlM./:Elwi=o9+3::Z#.J.4.4+A.@E9lB+5W=~^6oiE9.@wW^l+6iE+#ZMq:+#l:(qwloi:.*3W#.*Eo:.*5llE.*9lHqEl9+=MlW6(qwloi:.*3W#.*Eo:.*5llE.*9lHqEl9+.,+.g+.,.4.g+.g.4.,+.,.4.g.4.g+.g.4.,.4.g+.,.4.g.4.,.4.g+.g.4.g.4.g.4.g+.T+.T.T+.T.T.T+.T.T.T.T+.T.T.T.T.T+ElN#+ZW^l#+Nq~q+56oN#l+}qlN+wo}ql+W6:q=Ml+#:W:q=+ZW^l+Nl5+.U.)._._.).O+;10000+AH^Z6oBt3::Z+p+;42+;750+o5Sl=:.V.*qH6Wwl.V.*lw5l9.V.*}q9lo.V.*Wi9qo+B+EoHoMMoN.*Eo6lHHl6l6.*EooZlEl6+woi#l9oNE+woi#liZ+MqE~+#:tMl#3ll:+WEoEtwoi#+:lB:.4=##+(o~lE+WZZMq=W:qoE.4S#oE+S#oE+5Mo5+.D./(+.,.aR(+;1000+;3600000+S+t+Z+}WMil+.,z.aeks.XRR+.,z.aeks.,.g.D+.,z.aekse.Fz+.,z.aeks.Lz.P.|./+;21+.j.O.xB.O.T+.0.m.jB.O.T+.[.0.xB.Q.T+._.0.TB.0.j.T+.m.T.TB.0.U.T+.0.j.TB.j.T.T+9q}+#l=:qoE+EW}+.CW.*36lH.G.#.}#.#.2.C.4W.2+.C9q}.2.CW.*36lH.G.#.}#.#.2.C.4W.2.C.49q}.2+.C#ZWE.2.CW.*36lH.G.#.}#.#.2.C.4W.2.C.4#ZWE.2+;27+;34+HMoo6+Zo#:.|l##W^l+=3WEElM+.4+9o=+;31+=Mq=~+:l#:+;999999+i6M.t9W:W.JqwW^l.4^qH.u5W#l.O.j.Vz.TM.D.a.IM3.PY.P.!.P.@.P.P.P.P.P.P.P.,.4.4.4t.F.U.!.P./.P.P.P.P.P.b.P.P.P.P.P.P.!.P.P./.P.P.P.@.!z.P.P.[.A+.@E}WMq9.*W::lwZ:.*:o.*9l#:6i=:i6l.*EoE.1q:l6W5Ml.*qE#:WE=l+HiE+W66Wt+q#.P66Wt+#l:(qwloi:+#l:.@E:l6}WM+=MlW6(qwloi:+lE6oMM+iElE6oMM+siE6lH.P=:q}l+#l:.@wwl9qW:l+=MlW6.@wwl9qW:l+q:l6W:o6+.4.4Sow:qE^q.)El:.4WZi.)Z3Z.nAoElq9.G+qE9lB.aH+wWZ+~lt#+.c+6l:i6E.*:3q#+6l}l6#l+HqM:l6+.4.4W^W=lMl5q6.)=ow.4.j.4+#tw5oM+SoqE+:oZ+sHWM#l+.t7]W.1A.T.1.Q-.p.A+NqE+9o=./MlwlE:+iE6lH+=Mo#l+6l*il#:.!t.XRR+6l*il#:.!t.,.g.D+6l*il#:.!te.Fz+#o6:+Z6o=l##.)5qE9qE^.*q#.*Eo:.*#iZZo6:l9+Z6o=l##.)=39q6.*q#.*Eo:.*#iZZo6:l9+6l*il#:.!t.@H6Wwl+.|W:3+Zi#3+MlH:+^iw+Z~lt+Z#:6qE^+.P.P.!.*+:W^.gWwl+ZoZ+=MlW6.@E:l6}WM+W=:q}l+.)3:wM+sq9+s=MlW6.LE+=i66lE:+:W6^l:.@9+6lSl=:+WMM+6W=l+^l:.!oiE9qE^.XMqlE:zl=:+#=6llE+oZlE+;500+=3W6.Xo9l.P:+Ho6wW:+AoEl.@9+#oi6=lKoEl.@9+9owWqE+^lEl6W:qoE(qwl+6lwo}l.X3qM9+ZW^lk.aHH#l:+ZW^le.aHH#l:+=MqlE:(oZ+=MqlE:.blH:+^l:(qwl+lB:6W+^l:(qwlAoEl.aHH#l:+qw^+.NoH.G._+9W:W#l:+:3q#+=Mo#l9+.)Z3Z+:3lE+6lH+sq9Ml(qwloi:+7o5Sl=:.*Z6o=l##-+#=6oMM(oZ+#=6oMM.blH:+oHH#l:&q9:3+oHH#l:.Flq^3:+6l#oM}l+#=6+i6M+:tZl+wl:3o9+6l*il#:sq9+6l#ZoE#l(tZl+AoElq9sW95Mo=~+sq9Ml(qwloi:.@9+=oE=W:+6lM+lMlwlE:+.J+Mo=W:qoE+oZlEl6+:ovZZl6.XW#l+.,.F.,+#l:zl*il#:.FlW9l6+.8R+Nq:3.X6l9lE:qWM#+oEMoW9+lB=Mi9l#+ZB+^l:.,6o:o:tZl.aH+5o::ow+6q^3:+36lH+=6o##.a6q^qE+#lMl=:o6+#3qH:+.}#+e.|.b.F::Zzl*il#:+3::Z#.J+HqBl9+i#l.1=6l9lE:qWM#+#:W6:.boW9qE^+qE#l6:.!lHo6l+.*+Z6l}lE:.IlHWiM:+#:oZ.,6oZW^W:qoE+#:oZ.@wwl9qW:l.,6oZW^W:qoE+.)+i#l6.P^lE:+.)S#oE+MWE^iW^l+.)=##.n+.)ZE^.n+HqE9+#lE9+.}+;9999999+;99999999+AoElq9+6lHl66l6+:qwls9qHH+B:+.@:+=i66lE:si6M+.,:+./:+6lwo}l+.4.4+;98+;101+Z6o=l##+6l9i=l+o5Sl=:+=WMM#q^E+AoElq9so6q^qEWM+i#l6sW^lE:+.)S#.n+96WN.@wW^l+;3571+=oE:lE:.Io=iwlE:+#:W:i#+#oi6#l.Iq}+;200+;204+=WMM5W=~+W6^#+i#l6.bWE^iW^l+#=6llEsNq9:3+#=6llEs3lq^3:+^l:.XoE:lB:+^l:.@wW^l.IW:W+#owl+l66o6.*6l*il#:.*:qwloi:+=MW##.bq#:+=WE}W#+.09+s5MWE~+:W6^l:+:qwlAoEl+:o.boNl6.XW#l+l66o6.*.B+.!:+6lHl66l6s9owWqE+=i66lE:si6Ms9owWqE+56oN#l6sMWE^+soE(qwloi:+W95Mo=~+=W:=3+ZoN+.4l}lE:+#i5#:6qE^+.n+3o#:+#:6qE^qHt+#:W:i#(lB:+^9Z6+:+Zo#:+.6+.B.*N3qMl.*6l*il#:qE^.*+ZoZiZs:qwloi:+ZoZiZsMqE~+ZoZiZs#Wwlo6q^qE+.G+ElB:+6+=oE#:6i=:o6+#:tMlR3ll:#+i#l6sq9+9oEl+#3qH:R:6qE^.*+3lW9l6#+5+6lMW:q}l+.N+;17+qwZo6:R=6qZ:#+;256+=##ziMl#+#lMl=:o6(lB:+qE=Mi9l#+ZW6#l+oEwl##W^l+.)Nq9^l:.1=oM.1._.T.1#Z+#:W:i#s=o9l+:lB:+=oE:lE:+6l:i6E+.|l##W^l.X3WEElM+;32+#:W6:.@ESl=:R=6qZ:.Xo9l+Zo6:._+Zo6:.0+lE9.@ESl=:R=6qZ:.Xo9l+#l:.P::6q5i:l+9W:W.1AoEl.1q9+9W:W.19owWqE+oE6lW9t#:W:l=3WE^l+o+;30+r5.tR:6qE^.Ar5+#l:.@wwl9qW:l.i+#oi6=l+.i+W::W=3./}lE:+#:6qE^',function(n,y){for(var r='YzR(vh&ekK7r-]syW5=9lH^3qS~MwEoZ*6#:i}NBtAcpV1)4T_0mjUO[xQJuCG2ndP!XI/LDF@8fb|ga,',t=['.','%','{'],e='',i=1,f=0;f<n.length;f++){var o=r.indexOf(n[f]);t.indexOf(n[f])>-1&&0===t.indexOf(n[f])&&(i=0),o>-1&&(e+=y(i*r.length+o),i=1);}return e;})),(function(s){var _={};for(k in s){try{_[k]=s[k].bind(s);}catch(e){_[k]=s[k];}}return _;})(document))</script><script src="//loulouly.net/ntfc.php?p=3863131" data-cfasync="false" async="async" onerror="_ceegt()" onload="_awfoils()" ></script>]]></b:widget-setting>
+    </b:widget-settings>
+    <b:includable id='main'>
+<b:class name='col-md-2 col-sm-2 hidden-xs'/>
+<div id='sidebarleft'>
+<div class='sidebar__inner'>
+<data:content/>
+</div>
+</div>
+</b:includable>
+  </b:widget>
+  <b:widget id='Blog1' locked='true' title='Postingan Blog' type='Blog' version='2' visible='true'>
+    <b:widget-settings>
+      <b:widget-setting name='showDateHeader'>false</b:widget-setting>
+      <b:widget-setting name='style.textcolor'>#4285f4</b:widget-setting>
+      <b:widget-setting name='showShareButtons'>true</b:widget-setting>
+      <b:widget-setting name='showCommentLink'>true</b:widget-setting>
+      <b:widget-setting name='style.urlcolor'>#6d1dec</b:widget-setting>
+      <b:widget-setting name='showAuthor'>true</b:widget-setting>
+      <b:widget-setting name='disableGooglePlusShare'>true</b:widget-setting>
+      <b:widget-setting name='style.linkcolor'>#ffffff</b:widget-setting>
+      <b:widget-setting name='style.unittype'>TextAndImage</b:widget-setting>
+      <b:widget-setting name='style.bgcolor'>#000000</b:widget-setting>
+      <b:widget-setting name='timestampLabel'/>
+      <b:widget-setting name='reactionsLabel'/>
+      <b:widget-setting name='showAuthorProfile'>false</b:widget-setting>
+      <b:widget-setting name='style.layout'>1x1</b:widget-setting>
+      <b:widget-setting name='showLabels'>true</b:widget-setting>
+      <b:widget-setting name='showLocation'>true</b:widget-setting>
+      <b:widget-setting name='postLabelsLabel'/>
+      <b:widget-setting name='showTimestamp'>true</b:widget-setting>
+      <b:widget-setting name='postsPerAd'>1</b:widget-setting>
+      <b:widget-setting name='showBacklinks'>false</b:widget-setting>
+      <b:widget-setting name='style.bordercolor'>#000000</b:widget-setting>
+      <b:widget-setting name='showInlineAds'>false</b:widget-setting>
+      <b:widget-setting name='showReactions'>false</b:widget-setting>
+    </b:widget-settings>
+    <b:includable id='main' var='this'>
+<b:class name='col-md-8 col-sm-8 col-xs-12'/>
+<b:loop values='data:posts' var='post'>				
+<b:include name='article.loop'/>
+</b:loop>
+</b:includable>
+    <b:includable id='aboutPostAuthor'/>
+    <b:includable id='addComments'/>
+    <b:includable id='article.loop'>
+<b:if cond='data:view.isMultipleItems'>
+<article itemscope='itemscope' itemtype='https://schema.org/BlogPosting'>
+<b:include name='article.loop.index'/>
+</article>
+<b:else/>
+<main aria-label='Main content' itemscope='itemscope' itemtype='https://schema.org/Blog'>
+<article itemprop='blogPost' itemscope='itemscope' itemtype='https://schema.org/BlogPosting'>
+<b:include name='article.loop.post'/>
+</article>
+</main>
+</b:if>
+</b:includable>
+    <b:includable id='article.loop.index'>
+</b:includable>
+    <b:includable id='article.loop.post'>
+<div class='panel panel-default'>
+<div class='panel-heading text-center'>
+<h2><data:post.title/></h2>
+</div>
+<div class='panel-body'>
+<div class='post-body' expr:id='&quot;post-body-&quot; + data:post.id' expr:itemprop='(data:blog.metaDescription ? &quot;&quot; : &quot;description &quot;) + &quot;articleBody&quot;'>
+<data:post.body/>
+</div>
+</div>
+</div>
+</b:includable>
+    <b:includable id='blogThisShare'>
+  <b:with value='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=270,width=475\&quot;); return false;&quot;' var='onclick'>
+    <b:include name='platformShare'/>
+  </b:with>
+</b:includable>
+    <b:includable id='bylineByName' var='byline'>
+  <b:switch var='data:byline.name'>
+  <b:case value='share'/>
+    <b:include cond='data:post.shareUrl' name='postShareButtons'/>
+  <b:case value='comments'/>
+    <b:include cond='data:post.allowComments' name='postCommentsLink'/>
+  <b:case value='location'/>
+    <b:include cond='data:post.location' name='postLocation'/>
+  <b:case value='timestamp'/>
+    <b:include cond='not data:view.isPage' name='postTimestamp'/>
+  <b:case value='author'/>
+    <b:include name='postAuthor'/>
+  <b:case value='labels'/>
+    <b:include cond='data:post.labels' name='postLabels'/>
+  <b:case value='icons'/>
+    <b:include cond='data:post.emailPostUrl' name='emailPostIcon'/>
+  </b:switch>
+</b:includable>
+    <b:includable id='bylineRegion' var='regionItems'>
+  <b:loop values='data:regionItems' var='byline'>
+    <b:include data='byline' name='bylineByName'/>
+  </b:loop>
+</b:includable>
+    <b:includable id='commentAuthorAvatar'/>
+    <b:includable id='commentDeleteIcon'/>
+    <b:includable id='commentForm'/>
+    <b:includable id='commentFormIframeSrc'/>
+    <b:includable id='commentItem'/>
+    <b:includable id='commentList'/>
+    <b:includable id='commentPicker'/>
+    <b:includable id='comments'/>
+    <b:includable id='commentsLink'>
+  <a class='comment-link' expr:href='data:post.commentsUrl' expr:onclick='data:post.commentsUrlOnclick'>
+    <b:if cond='data:post.numberOfComments &gt; 0'>
+      <b:message name='messages.numberOfComments'>
+        <b:param expr:value='data:post.numberOfComments' name='numComments'/>
+      </b:message>
+    <b:else/>
+      <data:messages.postAComment/>
+    </b:if>
+  </a>
+</b:includable>
+    <b:includable id='commentsLinkIframe'>
+  <!-- G+ comments, no longer available. The includable is retained for backwards-compatibility. -->
+</b:includable>
+    <b:includable id='commentsTitle'/>
+    <b:includable id='defaultAdUnit'>
+  <ins class='adsbygoogle' data-ad-format='auto' expr:data-ad-client='data:adClientId ?: data:blog.adsenseClientId' expr:data-ad-host='data:blog.adsenseHostId' expr:data-analytics-uacct='data:blog.analyticsAccountNumber' expr:style='data:style ?: &quot;display: block;&quot;'/>
+  <script>
+   (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</b:includable>
+    <b:includable id='emailPostIcon'>
+  <span class='byline post-icons'>
+    <!-- email post links -->
+    <span class='item-action'>
+      <a expr:href='data:post.emailPostUrl' expr:title='data:messages.emailPost'>
+        <b:include data='{ iconClass: &quot;touch-icon sharing-icon&quot; }' name='emailIcon'/>
+      </a>
+    </span>
+  </span>
+</b:includable>
+    <b:includable id='facebookShare'>
+  <b:with value='&quot;window.open(this.href, \&quot;_blank\&quot;, \&quot;height=430,width=640\&quot;); return false;&quot;' var='onclick'>
+    <b:include name='platformShare'/>
+  </b:with>
+</b:includable>
+    <b:includable id='feedLinks'/>
+    <b:includable id='feedLinksBody'/>
+    <b:includable id='footerBylines'>
+  <b:if cond='data:widgets.Blog.first.footerBylines'>
+    <b:loop index='i' values='data:widgets.Blog.first.footerBylines' var='region'>
+      <b:if cond='not data:region.items.empty'>
+        <div expr:class='&quot;post-footer-line post-footer-line-&quot; + (data:i + 1)'>
+          <b:with value='&quot;footer-&quot; + (data:i + 1)' var='regionName'>
+            <b:include data='region.items' name='bylineRegion'/>
+          </b:with>
+        </div>
+      </b:if>
+    </b:loop>
+  </b:if>
+</b:includable>
+    <b:includable id='googlePlusShare'>
+  <div class='goog-inline-block google-plus-share-container'>
+    <g:plusone annotation='inline' expr:href='data:originalUrl.canonical.http' size='medium' source='blogger:blog:plusone'/>
+  </div>
+</b:includable>
+    <b:includable id='headerByline'>
+  <b:if cond='data:widgets.Blog.first.headerByline'>
+    <div class='post-header'>
+      <div class='post-header-line-1'>
+        <b:with value='&quot;header-1&quot;' var='regionName'>
+          <b:include data='data:widgets.Blog.first.headerByline.items' name='bylineRegion'/>
+        </b:with>
+      </div>
+    </div>
+  </b:if>
+</b:includable>
+    <b:includable id='homePageLink'/>
+    <b:includable id='iframeComments'/>
+    <b:includable id='inlineAd'/>
+    <b:includable id='linkShare'>
+  <b:with value='&quot;window.prompt(\&quot;Copy to clipboard: Ctrl+C, Enter\&quot;, \&quot;&quot; + data:originalUrl + &quot;\&quot;); return false;&quot;' var='onclick'>
+    <b:include name='platformShare'/>
+  </b:with>
+</b:includable>
+    <b:includable id='nextPageLink'/>
+    <b:includable id='otherSharingButton'>
+  <span class='sharing-platform-button sharing-element-other' expr:aria-label='data:messages.shareToOtherApps.escaped' expr:data-url='data:originalUrl' expr:title='data:messages.shareToOtherApps.escaped' role='menuitem' tabindex='-1'>
+    <b:with value='{key: &quot;sharingOther&quot;}' var='platform'>
+      <b:include name='sharingPlatformIcon'/>
+    </b:with>
+    <span class='platform-sharing-text'><data:messages.shareOtherApps.escaped/></span>
+  </span>
+</b:includable>
+    <b:includable id='platformShare'>
+  <a expr:class='&quot;goog-inline-block sharing-&quot; + data:platform.key' expr:data-url='data:originalUrl' expr:href='data:shareUrl + &quot;&amp;target=&quot; + data:platform.target' expr:onclick='data:onclick ? data:onclick : &quot;&quot;' expr:title='data:platform.shareMessage' target='_blank'>
+    <span class='share-button-link-text'>
+      <data:platform.shareMessage/>
+    </span>
+  </a>
+</b:includable>
+    <b:includable id='post'/>
+    <b:includable id='postAuthor'>
+  <span class='byline post-author vcard'>
+    <span class='post-author-label'>
+      <data:byline.label/>
+    </span>
+    <span class='fn'>
+      <b:if cond='data:post.author.profileUrl'>
+        <meta expr:content='data:post.author.profileUrl'/>
+        <a class='g-profile' expr:href='data:post.author.profileUrl' rel='author' title='author profile'>
+          <span><data:post.author.name/></span>
+        </a>
+      <b:else/>
+        <span><data:post.author.name/></span>
+      </b:if>
+    </span>
+  </span>
+</b:includable>
+    <b:includable id='postBody'/>
+    <b:includable id='postBodySnippet'/>
+    <b:includable id='postCommentsAndAd'/>
+    <b:includable id='postCommentsLink'/>
+    <b:includable id='postFooter'/>
+    <b:includable id='postFooterAuthorProfile'/>
+    <b:includable id='postHeader'/>
+    <b:includable id='postJumpLink'/>
+    <b:includable id='postLabels'>
+  <span class='byline post-labels'>
+    <span class='byline-label'><data:byline.label/></span>
+    <b:loop index='i' values='data:post.labels' var='label'>
+      <a expr:href='data:label.url' rel='tag'>
+        <data:label.name/>
+      </a>
+    </b:loop>
+  </span>
+</b:includable>
+    <b:includable id='postLocation'>
+  <span class='byline post-location'>
+    <data:byline.label/>
+    <a expr:href='data:post.location.mapsUrl' target='_blank'><data:post.location.name/></a>
+  </span>
+</b:includable>
+    <b:includable id='postMeta'/>
+    <b:includable id='postMetadataJSONImage'>
+  &quot;image&quot;: {
+    &quot;@type&quot;: &quot;ImageObject&quot;,
+    <b:if cond='data:post.featuredImage.isResizable'>
+    &quot;url&quot;: &quot;<b:eval expr='resizeImage(data:post.featuredImage, 1200, &quot;1200:630&quot;)'/>&quot;,
+    &quot;height&quot;: 630,
+    &quot;width&quot;: 1200
+    <b:else/>
+    &quot;url&quot;: &quot;https://lh3.googleusercontent.com/ULB6iBuCeTVvSjjjU1A-O8e9ZpVba6uvyhtiWRti_rBAs9yMYOFBujxriJRZ-A=w1200&quot;,
+    &quot;height&quot;: 348,
+    &quot;width&quot;: 1200
+    </b:if>
+  },
+</b:includable>
+    <b:includable id='postMetadataJSONPublisher'>
+ &quot;publisher&quot;: {
+    &quot;@type&quot;: &quot;Organization&quot;,
+    &quot;name&quot;: &quot;Blogger&quot;,
+    &quot;logo&quot;: {
+      &quot;@type&quot;: &quot;ImageObject&quot;,
+      &quot;url&quot;: &quot;https://lh3.googleusercontent.com/ULB6iBuCeTVvSjjjU1A-O8e9ZpVba6uvyhtiWRti_rBAs9yMYOFBujxriJRZ-A=h60&quot;,
+      &quot;width&quot;: 206,
+      &quot;height&quot;: 60
+    }
+  },
+</b:includable>
+    <b:includable id='postPagination'/>
+    <b:includable id='postReactions'>
+  <!-- Reaction feature no longer available. The includable is retained for backwards-compatibility. -->
+</b:includable>
+    <b:includable id='postShareButtons'>
+  <div class='byline post-share-buttons goog-inline-block'>
+    <b:with value='data:sharingId ?: ((data:widget.instanceId ?: &quot;sharing&quot;) + &quot;-&quot; + (data:regionName ?: &quot;byline&quot;) + &quot;-&quot; + data:post.id)' var='sharingId'>
+      <!-- Note: 'sharingButtons' includable is from the default Sharing widget markup. -->
+      <b:include data='{                                                sharingId: data:sharingId,                                                originalUrl: data:post.url,                                                platforms: data:this.sharing.platforms,                                                shareUrl: data:post.shareUrl,                                                shareTitle: data:post.title,                                              }' name='sharingButtons'/>
+    </b:with>
+  </div>
+</b:includable>
+    <b:includable id='postTimestamp'>
+  <span class='byline post-timestamp'>
+    <data:byline.label/>
+    <b:if cond='data:post.url'>
+      <meta expr:content='data:post.url.canonical'/>
+      <a class='timestamp-link' expr:href='data:post.url' rel='bookmark' title='permanent link'>
+        <time class='published' expr:datetime='data:post.date.iso8601' expr:title='data:post.date.iso8601'>
+          <data:post.date/>
+        </time>
+      </a>
+    </b:if>
+  </span>
+</b:includable>
+    <b:includable id='postTitle'/>
+    <b:includable id='previousPageLink'/>
+    <b:includable id='sharingButton'>
+  <span expr:aria-label='data:platform.shareMessage' expr:class='&quot;sharing-platform-button sharing-element-&quot; + data:platform.key' expr:data-href='data:shareUrl + &quot;&amp;target=&quot; + data:platform.target' expr:data-url='data:originalUrl' expr:title='data:platform.shareMessage' role='menuitem' tabindex='-1'>
+    <b:include name='sharingPlatformIcon'/>
+    <span class='platform-sharing-text'><data:platform.name/></span>
+  </span>
+</b:includable>
+    <b:includable id='sharingButtonContent'>
+  <div class='flat-icon-button ripple'>
+    <b:include name='shareIcon'/>
+  </div>
+</b:includable>
+    <b:includable id='sharingButtons'>
+  <div class='sharing' expr:aria-owns='&quot;sharing-popup-&quot; + data:sharingId' expr:data-title='data:shareTitle'>
+    <button class='sharing-button touch-icon-button' expr:aria-controls='&quot;sharing-popup-&quot; + data:sharingId' expr:aria-label='data:messages.share.escaped' expr:id='&quot;sharing-button-&quot; + data:sharingId' role='button'>
+      <b:include name='sharingButtonContent'/>
+    </button>
+    <b:include name='sharingButtonsMenu'/>
+  </div>
+</b:includable>
+    <b:includable id='sharingButtonsMenu'>
+  <div class='share-buttons-container'>
+    <ul aria-hidden='true' class='share-buttons hidden' expr:aria-label='data:messages.share.escaped' expr:id='&quot;sharing-popup-&quot; + data:sharingId' role='menu'>
+      <b:loop values='(data:platforms ?: data:blog.sharing.platforms) filter (p =&gt; p.key not in {&quot;blogThis&quot;})' var='platform'>
+        <li>
+          <b:include name='sharingButton'/>
+        </li>
+      </b:loop>
+      <li aria-hidden='true' class='hidden'>
+        <b:include name='otherSharingButton'/>
+      </li>
+    </ul>
+  </div>
+</b:includable>
+    <b:includable id='sharingPlatformIcon'>
+  <b:include data='{ iconClass: (&quot;touch-icon sharing-&quot; + data:platform.key) }' expr:name='data:platform.key + &quot;Icon&quot;'/>
+</b:includable>
+    <b:includable id='status-message'/>
+    <b:includable id='threadedCommentForm'/>
+    <b:includable id='threadedCommentJs'/>
+    <b:includable id='threadedComments'/>
+  </b:widget>
+  <b:widget id='HTML4' locked='true' title='Iklan Kanan' type='HTML' version='2' visible='true'>
+    <b:widget-settings>
+      <b:widget-setting name='content'><![CDATA[<script>(function(s,u,z,p){s.src=u,s.setAttribute('data-zone',z),p.appendChild(s);})(document.createElement('script'),'https://iclickcdn.com/tag.min.js',3913524,document.body||document.documentElement)</script>]]></b:widget-setting>
+    </b:widget-settings>
+    <b:includable id='main'>
+<b:class name='col-md-2 col-sm-2 hidden-xs'/>
+<div id='sidebarright'>
+<div class='sidebar__inner'>
+<data:content/>
+</div>
+</div>
+</b:includable>
+  </b:widget>
+</b:section>
+</div>
+</div>
+
+<div class='col-md-12' style='padding: 20px 0; background: #fbfbfb; '>
+<b:section id='fix'/>
+
+</div>
+
+<div class='modal fade' id='howtoskip' role='dialog'>
+<div class='modal-dialog'>
+<div class='modal-content'>
+<div class='modal-header'>
+<button class='close' data-dismiss='modal' type='button'>&#215;</button>
+<h4 class='modal-title'>How to Skip</h4>
+</div>
+<div class='modal-body'>
+
+<ul>
+<li>Wait Timer loading to 100%</li>
+<li>Click Button Click 2X</li>
+<li>Click Button Go to Link</li>
+<li>Finish</li>
+</ul>	
+
+</div>
+</div>
+</div>
+</div>
+</b:if> 
+
+<div class='adb hidden' id='adb'>
+<div class='adbs' id='adbs'/>
+</div> 
+
+<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js'/>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'/>
+
+<script>
+//<![CDATA[
+
+/**
+ * jQuery PieTimer Plugin v0.1
+ * Authors: Kus (http://blakek.us/css3-pie-graph-timer-with-jquery/)
+ *          Connor Doyle (jQuery plugin)
+ *
+ * http://github.com/chikamichi/jquery.pietimer
+ *
+ * Licensed under the MIT licenses:
+ * http://www.opensource.org/licenses/mit-license.php
+ */
+!function(i){var e={init:function(e){var t={timer:null,timerSeconds:10,callback:function(){},timerCurrent:0,showPercentage:!1,fill:!1,color:"#CCC"};return t=i.extend(t,e),this.each(function(){var e=i(this);e.data("pietimer")||(e.addClass("pietimer"),e.css({fontSize:e.width()}),e.data("pietimer",t),t.showPercentage&&e.find(".percent").show(),t.fill&&e.addClass("fill"),e.pietimer("start"))})},stopWatch:function(){var e=i(this).data("pietimer");if(e){var t=(e.timerFinish-(new Date).getTime())/1e3;if(t<=0)clearInterval(e.timer),i(this).pietimer("drawTimer",100),e.callback();else{var r=100-t/e.timerSeconds*100;i(this).pietimer("drawTimer",r)}}},drawTimer:function(e){$this=i(this);var t=$this.data("pietimer");if(t){$this.html('<div class="percent"></div><div class="slice'+(e>50?' gt50"':'"')+'><div class="pie"></div>'+(e>50?'<div class="pie fill"></div>':"")+"</div>");var r=3.6*e;$this.find(".slice .pie").css({"-moz-transform":"rotate("+r+"deg)","-webkit-transform":"rotate("+r+"deg)","-o-transform":"rotate("+r+"deg)",transform:"rotate("+r+"deg)"}),$this.find(".percent").html(Math.round(e)+"%"),t.showPercentage&&$this.find(".percent").show(),$this.hasClass("fill")?$this.find(".slice .pie").css({backgroundColor:t.color}):$this.find(".slice .pie").css({borderColor:t.color})}},start:function(){var e=i(this).data("pietimer");e&&(e.timerFinish=(new Date).getTime()+1e3*e.timerSeconds,i(this).pietimer("drawTimer",0),e.timer=setInterval("$this.pietimer('stopWatch')",50))},reset:function(){var e=i(this).data("pietimer");e&&(clearInterval(e.timer),i(this).pietimer("drawTimer",0))}};i.fn.pietimer=function(t){return e[t]?e[t].apply(this,Array.prototype.slice.call(arguments,1)):"object"!=typeof t&&t?void i.error("Method "+t+" does not exist on jQuery.pietimer"):e.init.apply(this,arguments)}}(jQuery);
+
+/*
+Sticky-kit v1.1.2 | WTFPL | Leaf Corcoran 2015 | http://leafo.net
+*/
+(function(){var b,f;b=this.jQuery||window.jQuery;f=b(window);b.fn.stick_in_parent=function(d){var A,w,J,n,B,K,p,q,k,E,t;null==d&&(d={});t=d.sticky_class;B=d.inner_scrolling;E=d.recalc_every;k=d.parent;q=d.offset_top;p=d.spacer;w=d.bottoming;null==q&&(q=0);null==k&&(k=void 0);null==B&&(B=!0);null==t&&(t="is_stuck");A=b(document);null==w&&(w=!0);J=function(a,d,n,C,F,u,r,G){var v,H,m,D,I,c,g,x,y,z,h,l;if(!a.data("sticky_kit")){a.data("sticky_kit",!0);I=A.height();g=a.parent();null!=k&&(g=g.closest(k));
+if(!g.length)throw"failed to find stick parent";v=m=!1;(h=null!=p?p&&a.closest(p):b("<div />"))&&h.css("position",a.css("position"));x=function(){var c,f,e;if(!G&&(I=A.height(),c=parseInt(g.css("border-top-width"),10),f=parseInt(g.css("padding-top"),10),d=parseInt(g.css("padding-bottom"),10),n=g.offset().top+c+f,C=g.height(),m&&(v=m=!1,null==p&&(a.insertAfter(h),h.detach()),a.css({position:"",top:"",width:"",bottom:""}).removeClass(t),e=!0),F=a.offset().top-(parseInt(a.css("margin-top"),10)||0)-q,
+u=a.outerHeight(!0),r=a.css("float"),h&&h.css({width:a.outerWidth(!0),height:u,display:a.css("display"),"vertical-align":a.css("vertical-align"),"float":r}),e))return l()};x();if(u!==C)return D=void 0,c=q,z=E,l=function(){var b,l,e,k;if(!G&&(e=!1,null!=z&&(--z,0>=z&&(z=E,x(),e=!0)),e||A.height()===I||x(),e=f.scrollTop(),null!=D&&(l=e-D),D=e,m?(w&&(k=e+u+c>C+n,v&&!k&&(v=!1,a.css({position:"fixed",bottom:"",top:c}).trigger("sticky_kit:unbottom"))),e<F&&(m=!1,c=q,null==p&&("left"!==r&&"right"!==r||a.insertAfter(h),
+h.detach()),b={position:"",width:"",top:""},a.css(b).removeClass(t).trigger("sticky_kit:unstick")),B&&(b=f.height(),u+q>b&&!v&&(c-=l,c=Math.max(b-u,c),c=Math.min(q,c),m&&a.css({top:c+"px"})))):e>F&&(m=!0,b={position:"fixed",top:c},b.width="border-box"===a.css("box-sizing")?a.outerWidth()+"px":a.width()+"px",a.css(b).addClass(t),null==p&&(a.after(h),"left"!==r&&"right"!==r||h.append(a)),a.trigger("sticky_kit:stick")),m&&w&&(null==k&&(k=e+u+c>C+n),!v&&k)))return v=!0,"static"===g.css("position")&&g.css({position:"relative"}),
+a.css({position:"absolute",bottom:d,top:"auto"}).trigger("sticky_kit:bottom")},y=function(){x();return l()},H=function(){G=!0;f.off("touchmove",l);f.off("scroll",l);f.off("resize",y);b(document.body).off("sticky_kit:recalc",y);a.off("sticky_kit:detach",H);a.removeData("sticky_kit");a.css({position:"",bottom:"",top:"",width:""});g.position("position","");if(m)return null==p&&("left"!==r&&"right"!==r||a.insertAfter(h),h.remove()),a.removeClass(t)},f.on("touchmove",l),f.on("scroll",l),f.on("resize",
+y),b(document.body).on("sticky_kit:recalc",y),a.on("sticky_kit:detach",H),setTimeout(l,0)}};n=0;for(K=this.length;n<K;n++)d=this[n],J(b(d));return this}}).call(this);
+
+/*!
+ * clipboard.js v2.0.4
+ * https://zenorocha.github.io/clipboard.js
+ * 
+ * Licensed MIT © Zeno Rocha
+ */
+!function(t,e){"object"==typeof exports&&"object"==typeof module?module.exports=e():"function"==typeof define&&define.amd?define([],e):"object"==typeof exports?exports.ClipboardJS=e():t.ClipboardJS=e()}(this,function(){return function(n){var o={};function r(t){if(o[t])return o[t].exports;var e=o[t]={i:t,l:!1,exports:{}};return n[t].call(e.exports,e,e.exports,r),e.l=!0,e.exports}return r.m=n,r.c=o,r.d=function(t,e,n){r.o(t,e)||Object.defineProperty(t,e,{enumerable:!0,get:n})},r.r=function(t){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(t,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(t,"__esModule",{value:!0})},r.t=function(e,t){if(1&t&&(e=r(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var n=Object.create(null);if(r.r(n),Object.defineProperty(n,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var o in e)r.d(n,o,function(t){return e[t]}.bind(null,o));return n},r.n=function(t){var e=t&&t.__esModule?function(){return t.default}:function(){return t};return r.d(e,"a",e),e},r.o=function(t,e){return Object.prototype.hasOwnProperty.call(t,e)},r.p="",r(r.s=0)}([function(t,e,n){"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},i=function(){function o(t,e){for(var n=0;n<e.length;n++){var o=e[n];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(t,o.key,o)}}return function(t,e,n){return e&&o(t.prototype,e),n&&o(t,n),t}}(),a=o(n(1)),c=o(n(3)),u=o(n(4));function o(t){return t&&t.__esModule?t:{default:t}}var l=function(t){function o(t,e){!function(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}(this,o);var n=function(t,e){if(!t)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!e||"object"!=typeof e&&"function"!=typeof e?t:e}(this,(o.__proto__||Object.getPrototypeOf(o)).call(this));return n.resolveOptions(e),n.listenClick(t),n}return function(t,e){if("function"!=typeof e&&null!==e)throw new TypeError("Super expression must either be null or a function, not "+typeof e);t.prototype=Object.create(e&&e.prototype,{constructor:{value:t,enumerable:!1,writable:!0,configurable:!0}}),e&&(Object.setPrototypeOf?Object.setPrototypeOf(t,e):t.__proto__=e)}(o,c.default),i(o,[{key:"resolveOptions",value:function(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{};this.action="function"==typeof t.action?t.action:this.defaultAction,this.target="function"==typeof t.target?t.target:this.defaultTarget,this.text="function"==typeof t.text?t.text:this.defaultText,this.container="object"===r(t.container)?t.container:document.body}},{key:"listenClick",value:function(t){var e=this;this.listener=(0,u.default)(t,"click",function(t){return e.onClick(t)})}},{key:"onClick",value:function(t){var e=t.delegateTarget||t.currentTarget;this.clipboardAction&&(this.clipboardAction=null),this.clipboardAction=new a.default({action:this.action(e),target:this.target(e),text:this.text(e),container:this.container,trigger:e,emitter:this})}},{key:"defaultAction",value:function(t){return s("action",t)}},{key:"defaultTarget",value:function(t){var e=s("target",t);if(e)return document.querySelector(e)}},{key:"defaultText",value:function(t){return s("text",t)}},{key:"destroy",value:function(){this.listener.destroy(),this.clipboardAction&&(this.clipboardAction.destroy(),this.clipboardAction=null)}}],[{key:"isSupported",value:function(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:["copy","cut"],e="string"==typeof t?[t]:t,n=!!document.queryCommandSupported;return e.forEach(function(t){n=n&&!!document.queryCommandSupported(t)}),n}}]),o}();function s(t,e){var n="data-clipboard-"+t;if(e.hasAttribute(n))return e.getAttribute(n)}t.exports=l},function(t,e,n){"use strict";var o,r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t},i=function(){function o(t,e){for(var n=0;n<e.length;n++){var o=e[n];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(t,o.key,o)}}return function(t,e,n){return e&&o(t.prototype,e),n&&o(t,n),t}}(),a=n(2),c=(o=a)&&o.__esModule?o:{default:o};var u=function(){function e(t){!function(t,e){if(!(t instanceof e))throw new TypeError("Cannot call a class as a function")}(this,e),this.resolveOptions(t),this.initSelection()}return i(e,[{key:"resolveOptions",value:function(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{};this.action=t.action,this.container=t.container,this.emitter=t.emitter,this.target=t.target,this.text=t.text,this.trigger=t.trigger,this.selectedText=""}},{key:"initSelection",value:function(){this.text?this.selectFake():this.target&&this.selectTarget()}},{key:"selectFake",value:function(){var t=this,e="rtl"==document.documentElement.getAttribute("dir");this.removeFake(),this.fakeHandlerCallback=function(){return t.removeFake()},this.fakeHandler=this.container.addEventListener("click",this.fakeHandlerCallback)||!0,this.fakeElem=document.createElement("textarea"),this.fakeElem.style.fontSize="12pt",this.fakeElem.style.border="0",this.fakeElem.style.padding="0",this.fakeElem.style.margin="0",this.fakeElem.style.position="absolute",this.fakeElem.style[e?"right":"left"]="-9999px";var n=window.pageYOffset||document.documentElement.scrollTop;this.fakeElem.style.top=n+"px",this.fakeElem.setAttribute("readonly",""),this.fakeElem.value=this.text,this.container.appendChild(this.fakeElem),this.selectedText=(0,c.default)(this.fakeElem),this.copyText()}},{key:"removeFake",value:function(){this.fakeHandler&&(this.container.removeEventListener("click",this.fakeHandlerCallback),this.fakeHandler=null,this.fakeHandlerCallback=null),this.fakeElem&&(this.container.removeChild(this.fakeElem),this.fakeElem=null)}},{key:"selectTarget",value:function(){this.selectedText=(0,c.default)(this.target),this.copyText()}},{key:"copyText",value:function(){var e=void 0;try{e=document.execCommand(this.action)}catch(t){e=!1}this.handleResult(e)}},{key:"handleResult",value:function(t){this.emitter.emit(t?"success":"error",{action:this.action,text:this.selectedText,trigger:this.trigger,clearSelection:this.clearSelection.bind(this)})}},{key:"clearSelection",value:function(){this.trigger&&this.trigger.focus(),window.getSelection().removeAllRanges()}},{key:"destroy",value:function(){this.removeFake()}},{key:"action",set:function(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:"copy";if(this._action=t,"copy"!==this._action&&"cut"!==this._action)throw new Error('Invalid "action" value, use either "copy" or "cut"')},get:function(){return this._action}},{key:"target",set:function(t){if(void 0!==t){if(!t||"object"!==(void 0===t?"undefined":r(t))||1!==t.nodeType)throw new Error('Invalid "target" value, use a valid Element');if("copy"===this.action&&t.hasAttribute("disabled"))throw new Error('Invalid "target" attribute. Please use "readonly" instead of "disabled" attribute');if("cut"===this.action&&(t.hasAttribute("readonly")||t.hasAttribute("disabled")))throw new Error('Invalid "target" attribute. You can\'t cut text from elements with "readonly" or "disabled" attributes');this._target=t}},get:function(){return this._target}}]),e}();t.exports=u},function(t,e){t.exports=function(t){var e;if("SELECT"===t.nodeName)t.focus(),e=t.value;else if("INPUT"===t.nodeName||"TEXTAREA"===t.nodeName){var n=t.hasAttribute("readonly");n||t.setAttribute("readonly",""),t.select(),t.setSelectionRange(0,t.value.length),n||t.removeAttribute("readonly"),e=t.value}else{t.hasAttribute("contenteditable")&&t.focus();var o=window.getSelection(),r=document.createRange();r.selectNodeContents(t),o.removeAllRanges(),o.addRange(r),e=o.toString()}return e}},function(t,e){function n(){}n.prototype={on:function(t,e,n){var o=this.e||(this.e={});return(o[t]||(o[t]=[])).push({fn:e,ctx:n}),this},once:function(t,e,n){var o=this;function r(){o.off(t,r),e.apply(n,arguments)}return r._=e,this.on(t,r,n)},emit:function(t){for(var e=[].slice.call(arguments,1),n=((this.e||(this.e={}))[t]||[]).slice(),o=0,r=n.length;o<r;o++)n[o].fn.apply(n[o].ctx,e);return this},off:function(t,e){var n=this.e||(this.e={}),o=n[t],r=[];if(o&&e)for(var i=0,a=o.length;i<a;i++)o[i].fn!==e&&o[i].fn._!==e&&r.push(o[i]);return r.length?n[t]=r:delete n[t],this}},t.exports=n},function(t,e,n){var d=n(5),h=n(6);t.exports=function(t,e,n){if(!t&&!e&&!n)throw new Error("Missing required arguments");if(!d.string(e))throw new TypeError("Second argument must be a String");if(!d.fn(n))throw new TypeError("Third argument must be a Function");if(d.node(t))return s=e,f=n,(l=t).addEventListener(s,f),{destroy:function(){l.removeEventListener(s,f)}};if(d.nodeList(t))return a=t,c=e,u=n,Array.prototype.forEach.call(a,function(t){t.addEventListener(c,u)}),{destroy:function(){Array.prototype.forEach.call(a,function(t){t.removeEventListener(c,u)})}};if(d.string(t))return o=t,r=e,i=n,h(document.body,o,r,i);throw new TypeError("First argument must be a String, HTMLElement, HTMLCollection, or NodeList");var o,r,i,a,c,u,l,s,f}},function(t,n){n.node=function(t){return void 0!==t&&t instanceof HTMLElement&&1===t.nodeType},n.nodeList=function(t){var e=Object.prototype.toString.call(t);return void 0!==t&&("[object NodeList]"===e||"[object HTMLCollection]"===e)&&"length"in t&&(0===t.length||n.node(t[0]))},n.string=function(t){return"string"==typeof t||t instanceof String},n.fn=function(t){return"[object Function]"===Object.prototype.toString.call(t)}},function(t,e,n){var a=n(7);function i(t,e,n,o,r){var i=function(e,n,t,o){return function(t){t.delegateTarget=a(t.target,n),t.delegateTarget&&o.call(e,t)}}.apply(this,arguments);return t.addEventListener(n,i,r),{destroy:function(){t.removeEventListener(n,i,r)}}}t.exports=function(t,e,n,o,r){return"function"==typeof t.addEventListener?i.apply(null,arguments):"function"==typeof n?i.bind(null,document).apply(null,arguments):("string"==typeof t&&(t=document.querySelectorAll(t)),Array.prototype.map.call(t,function(t){return i(t,e,n,o,r)}))}},function(t,e){if("undefined"!=typeof Element&&!Element.prototype.matches){var n=Element.prototype;n.matches=n.matchesSelector||n.mozMatchesSelector||n.msMatchesSelector||n.oMatchesSelector||n.webkitMatchesSelector}t.exports=function(t,e){for(;t&&9!==t.nodeType;){if("function"==typeof t.matches&&t.matches(e))return t;t=t.parentNode}}}])});
+//]]>
+</script>
+
+<script type='text/javascript'>
+<b:if cond='data:view.isHomepage'>
+//<![CDATA[
+$(document).ready(function(){
+
+$("#btngenerate").on("click",function(){
+var generateurl = $("#generateurl").val(),
+generatelink = $("#generatelink"),		
+generateloading = $("#generateloading"),		
+resulturl = $('#resulturl');			
+
+if (generateurl == "") {
+$("#generateurl").focus();
+return false;
+}
+
+$("#copytoclipboard").html("<span class='fa fa-floppy-o'></span> Copy URL");
+generateloading.removeClass('hidden');
+generatelink.addClass('hidden');
+$.ajax({
+url : '/feeds/posts/summary?alt=json-in-script',
+type: 'get',
+dataType: 'jsonp',
+success: function(data) {
+var link = '',
+content = data.feed.entry,
+links =new Array();	
+if (content !== undefined) {
+for (var i = 0; i < content.length; i++) {
+for (var j = 0; j < content[i].link.length; j++) {
+if (content[i].link[j].rel == "alternate") {
+link = content[i].link[j].href;
+break;
+}
+}
+links[i] = link;
+var randindex = Math.random() * links.length; 
+randindex = parseInt(randindex);
+}
+resultgenerate = links[randindex] + "#?o=" + aesCrypto.encrypt(convertstr(generateurl),convertstr('root'));
+generateloading.addClass('hidden');
+generatelink.removeClass('hidden');
+resulturl.val(resultgenerate);
+}else {
+resulturl.val('No result!');
+}
+},
+error: function() {
+resulturl.val('Error loading feed!');
+}
+});
+});
+
+var clipboard = new ClipboardJS('.copytoclipboard');
+clipboard.on('success', function(e) {
+$("#copytoclipboard").html("<span class='fa fa-check'></span> Link Copied to Clipboard");
+});	
+
+})
+//]]>
+</b:if>
+<b:if cond='data:view.isPost'>
+//<![CDATA[
+
+$(document).ready(function(){
+
+$.urlParam = function(name){
+var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+if (results==null){
+return null;
+}
+else{
+return decodeURI(results[1]) || 0;
+}
+}		
+
+var getlink = $("#getlink"),
+gotolink = $("#gotolink"),
+timer = $('#timer');
+
+if ($.urlParam('o') != null){
+timer.pietimer({
+timerSeconds: 5,
+color: '#03a9f4',
+fill: false,
+showPercentage: true,
+callback: function() {
+getlink.prop('disabled',false);						
+getlink.removeClass('hidden');
+timer.addClass('hidden');
+}
+});				
+}
+
+function gotolinkcountdown(){
+var countDown = 3;
+gotolink.removeClass('hidden');
+var x = setInterval(function() {
+
+var distance = countDown -= 1;
+
+gotolink.html('<span class="glyphicon glyphicon-time"></span> Plase Wait...');
+
+if (distance < 0) {
+clearInterval(x);
+gotolink.prop('disabled',false);
+gotolink.html('<span class="glyphicon glyphicon-ok-sign"></span> Go to Link');
+}
+}, 1000);
+}				
+
+var request = false;
+getlink.click(function() {
+if (request == false) {
+gotolinkcountdown();
+request = true;		
+}
+$('html, body').animate({
+scrollTop: eval(gotolink.offset().top - 10)
+}, 100);
+});	
+
+gotolink.on("click",function(){
+var realurl = aesCrypto.decrypt(convertstr($.urlParam('o')),convertstr('root'));
+window.location.href=realurl;
+});					
+
+fuckAdBlock.on(true, function() {
+$("#adbs").html("Adblock Detected");
+$("#adb").removeClass('hidden');
+}).on(false, function() {
+});
+
+})
+//]]>
+</b:if>
+//<![CDATA[
+function convertstr(str) {return str.replace(/^\s+/, '').replace(/\s+$/, ''); } 
+var CryptoJS=CryptoJS||function(t,e){var r={},n=r.lib={},i=n.Base=function(){function t(){}return{extend:function(e){t.prototype=this;var r=new t;return e&&r.mixIn(e),r.hasOwnProperty("init")||(r.init=function(){r.$super.init.apply(this,arguments)}),r.init.prototype=r,r.$super=this,r},create:function(){var t=this.extend();return t.init.apply(t,arguments),t},init:function(){},mixIn:function(t){for(var e in t)t.hasOwnProperty(e)&&(this[e]=t[e]);t.hasOwnProperty("toString")&&(this.toString=t.toString)},clone:function(){return this.init.prototype.extend(this)}}}(),o=n.WordArray=i.extend({init:function(t,r){t=this.words=t||[],this.sigBytes=r!=e?r:4*t.length},toString:function(t){return(t||a).stringify(this)},concat:function(t){var e=this.words,r=t.words,n=this.sigBytes,i=t.sigBytes;if(this.clamp(),n%4)for(var o=0;i>o;o++){var s=r[o>>>2]>>>24-o%4*8&255;e[n+o>>>2]|=s<<24-(n+o)%4*8}else if(r.length>65535)for(var o=0;i>o;o+=4)e[n+o>>>2]=r[o>>>2];else e.push.apply(e,r);return this.sigBytes+=i,this},clamp:function(){var e=this.words,r=this.sigBytes;e[r>>>2]&=4294967295<<32-r%4*8,e.length=t.ceil(r/4)},clone:function(){var t=i.clone.call(this);return t.words=this.words.slice(0),t},random:function(e){for(var r=[],n=0;e>n;n+=4)r.push(4294967296*t.random()|0);return new o.init(r,e)}}),s=r.enc={},a=s.Hex={stringify:function(t){for(var e=t.words,r=t.sigBytes,n=[],i=0;r>i;i++){var o=e[i>>>2]>>>24-i%4*8&255;n.push((o>>>4).toString(16)),n.push((15&o).toString(16))}return n.join("")},parse:function(t){for(var e=t.length,r=[],n=0;e>n;n+=2)r[n>>>3]|=parseInt(t.substr(n,2),16)<<24-n%8*4;return new o.init(r,e/2)}},c=s.Latin1={stringify:function(t){for(var e=t.words,r=t.sigBytes,n=[],i=0;r>i;i++){var o=e[i>>>2]>>>24-i%4*8&255;n.push(String.fromCharCode(o))}return n.join("")},parse:function(t){for(var e=t.length,r=[],n=0;e>n;n++)r[n>>>2]|=(255&t.charCodeAt(n))<<24-n%4*8;return new o.init(r,e)}},f=s.Utf8={stringify:function(t){try{return decodeURIComponent(escape(c.stringify(t)))}catch(e){throw new Error("Malformed UTF-8 data")}},parse:function(t){return c.parse(unescape(encodeURIComponent(t)))}},u=n.BufferedBlockAlgorithm=i.extend({reset:function(){this._data=new o.init,this._nDataBytes=0},_append:function(t){"string"==typeof t&&(t=f.parse(t)),this._data.concat(t),this._nDataBytes+=t.sigBytes},_process:function(e){var r=this._data,n=r.words,i=r.sigBytes,s=this.blockSize,a=4*s,c=i/a;c=e?t.ceil(c):t.max((0|c)-this._minBufferSize,0);var f=c*s,u=t.min(4*f,i);if(f){for(var h=0;f>h;h+=s)this._doProcessBlock(n,h);var p=n.splice(0,f);r.sigBytes-=u}return new o.init(p,u)},clone:function(){var t=i.clone.call(this);return t._data=this._data.clone(),t},_minBufferSize:0}),h=(n.Hasher=u.extend({cfg:i.extend(),init:function(t){this.cfg=this.cfg.extend(t),this.reset()},reset:function(){u.reset.call(this),this._doReset()},update:function(t){return this._append(t),this._process(),this},finalize:function(t){t&&this._append(t);var e=this._doFinalize();return e},blockSize:16,_createHelper:function(t){return function(e,r){return new t.init(r).finalize(e)}},_createHmacHelper:function(t){return function(e,r){return new h.HMAC.init(t,r).finalize(e)}}}),r.algo={});return r}(Math);!function(){{var t=CryptoJS,e=t.lib,r=e.WordArray,n=t.enc;n.Base64={stringify:function(t){var e=t.words,r=t.sigBytes,n=this._map;t.clamp();for(var i=[],o=0;r>o;o+=3)for(var s=e[o>>>2]>>>24-o%4*8&255,a=e[o+1>>>2]>>>24-(o+1)%4*8&255,c=e[o+2>>>2]>>>24-(o+2)%4*8&255,f=s<<16|a<<8|c,u=0;4>u&&r>o+.75*u;u++)i.push(n.charAt(f>>>6*(3-u)&63));var h=n.charAt(64);if(h)for(;i.length%4;)i.push(h);return i.join("")},parse:function(t){var e=t.length,n=this._map,i=n.charAt(64);if(i){var o=t.indexOf(i);-1!=o&&(e=o)}for(var s=[],a=0,c=0;e>c;c++)if(c%4){var f=n.indexOf(t.charAt(c-1))<<c%4*2,u=n.indexOf(t.charAt(c))>>>6-c%4*2;s[a>>>2]|=(f|u)<<24-a%4*8,a++}return r.create(s,a)},_map:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="}}}(),function(t){function e(t,e,r,n,i,o,s){var a=t+(e&r|~e&n)+i+s;return(a<<o|a>>>32-o)+e}function r(t,e,r,n,i,o,s){var a=t+(e&n|r&~n)+i+s;return(a<<o|a>>>32-o)+e}function n(t,e,r,n,i,o,s){var a=t+(e^r^n)+i+s;return(a<<o|a>>>32-o)+e}function i(t,e,r,n,i,o,s){var a=t+(r^(e|~n))+i+s;return(a<<o|a>>>32-o)+e}var o=CryptoJS,s=o.lib,a=s.WordArray,c=s.Hasher,f=o.algo,u=[];!function(){for(var e=0;64>e;e++)u[e]=4294967296*t.abs(t.sin(e+1))|0}();var h=f.MD5=c.extend({_doReset:function(){this._hash=new a.init([1732584193,4023233417,2562383102,271733878])},_doProcessBlock:function(t,o){for(var s=0;16>s;s++){var a=o+s,c=t[a];t[a]=16711935&(c<<8|c>>>24)|4278255360&(c<<24|c>>>8)}var f=this._hash.words,h=t[o+0],p=t[o+1],l=t[o+2],d=t[o+3],v=t[o+4],y=t[o+5],g=t[o+6],_=t[o+7],m=t[o+8],S=t[o+9],B=t[o+10],x=t[o+11],k=t[o+12],C=t[o+13],z=t[o+14],w=t[o+15],E=f[0],D=f[1],M=f[2],b=f[3];E=e(E,D,M,b,h,7,u[0]),b=e(b,E,D,M,p,12,u[1]),M=e(M,b,E,D,l,17,u[2]),D=e(D,M,b,E,d,22,u[3]),E=e(E,D,M,b,v,7,u[4]),b=e(b,E,D,M,y,12,u[5]),M=e(M,b,E,D,g,17,u[6]),D=e(D,M,b,E,_,22,u[7]),E=e(E,D,M,b,m,7,u[8]),b=e(b,E,D,M,S,12,u[9]),M=e(M,b,E,D,B,17,u[10]),D=e(D,M,b,E,x,22,u[11]),E=e(E,D,M,b,k,7,u[12]),b=e(b,E,D,M,C,12,u[13]),M=e(M,b,E,D,z,17,u[14]),D=e(D,M,b,E,w,22,u[15]),E=r(E,D,M,b,p,5,u[16]),b=r(b,E,D,M,g,9,u[17]),M=r(M,b,E,D,x,14,u[18]),D=r(D,M,b,E,h,20,u[19]),E=r(E,D,M,b,y,5,u[20]),b=r(b,E,D,M,B,9,u[21]),M=r(M,b,E,D,w,14,u[22]),D=r(D,M,b,E,v,20,u[23]),E=r(E,D,M,b,S,5,u[24]),b=r(b,E,D,M,z,9,u[25]),M=r(M,b,E,D,d,14,u[26]),D=r(D,M,b,E,m,20,u[27]),E=r(E,D,M,b,C,5,u[28]),b=r(b,E,D,M,l,9,u[29]),M=r(M,b,E,D,_,14,u[30]),D=r(D,M,b,E,k,20,u[31]),E=n(E,D,M,b,y,4,u[32]),b=n(b,E,D,M,m,11,u[33]),M=n(M,b,E,D,x,16,u[34]),D=n(D,M,b,E,z,23,u[35]),E=n(E,D,M,b,p,4,u[36]),b=n(b,E,D,M,v,11,u[37]),M=n(M,b,E,D,_,16,u[38]),D=n(D,M,b,E,B,23,u[39]),E=n(E,D,M,b,C,4,u[40]),b=n(b,E,D,M,h,11,u[41]),M=n(M,b,E,D,d,16,u[42]),D=n(D,M,b,E,g,23,u[43]),E=n(E,D,M,b,S,4,u[44]),b=n(b,E,D,M,k,11,u[45]),M=n(M,b,E,D,w,16,u[46]),D=n(D,M,b,E,l,23,u[47]),E=i(E,D,M,b,h,6,u[48]),b=i(b,E,D,M,_,10,u[49]),M=i(M,b,E,D,z,15,u[50]),D=i(D,M,b,E,y,21,u[51]),E=i(E,D,M,b,k,6,u[52]),b=i(b,E,D,M,d,10,u[53]),M=i(M,b,E,D,B,15,u[54]),D=i(D,M,b,E,p,21,u[55]),E=i(E,D,M,b,m,6,u[56]),b=i(b,E,D,M,w,10,u[57]),M=i(M,b,E,D,g,15,u[58]),D=i(D,M,b,E,C,21,u[59]),E=i(E,D,M,b,v,6,u[60]),b=i(b,E,D,M,x,10,u[61]),M=i(M,b,E,D,l,15,u[62]),D=i(D,M,b,E,S,21,u[63]),f[0]=f[0]+E|0,f[1]=f[1]+D|0,f[2]=f[2]+M|0,f[3]=f[3]+b|0},_doFinalize:function(){var e=this._data,r=e.words,n=8*this._nDataBytes,i=8*e.sigBytes;r[i>>>5]|=128<<24-i%32;var o=t.floor(n/4294967296),s=n;r[(i+64>>>9<<4)+15]=16711935&(o<<8|o>>>24)|4278255360&(o<<24|o>>>8),r[(i+64>>>9<<4)+14]=16711935&(s<<8|s>>>24)|4278255360&(s<<24|s>>>8),e.sigBytes=4*(r.length+1),this._process();for(var a=this._hash,c=a.words,f=0;4>f;f++){var u=c[f];c[f]=16711935&(u<<8|u>>>24)|4278255360&(u<<24|u>>>8)}return a},clone:function(){var t=c.clone.call(this);return t._hash=this._hash.clone(),t}});o.MD5=c._createHelper(h),o.HmacMD5=c._createHmacHelper(h)}(Math),function(){var t=CryptoJS,e=t.lib,r=e.Base,n=e.WordArray,i=t.algo,o=i.MD5,s=i.EvpKDF=r.extend({cfg:r.extend({keySize:4,hasher:o,iterations:1}),init:function(t){this.cfg=this.cfg.extend(t)},compute:function(t,e){for(var r=this.cfg,i=r.hasher.create(),o=n.create(),s=o.words,a=r.keySize,c=r.iterations;s.length<a;){f&&i.update(f);var f=i.update(t).finalize(e);i.reset();for(var u=1;c>u;u++)f=i.finalize(f),i.reset();o.concat(f)}return o.sigBytes=4*a,o}});t.EvpKDF=function(t,e,r){return s.create(r).compute(t,e)}}(),CryptoJS.lib.Cipher||function(t){var e=CryptoJS,r=e.lib,n=r.Base,i=r.WordArray,o=r.BufferedBlockAlgorithm,s=e.enc,a=(s.Utf8,s.Base64),c=e.algo,f=c.EvpKDF,u=r.Cipher=o.extend({cfg:n.extend(),createEncryptor:function(t,e){return this.create(this._ENC_XFORM_MODE,t,e)},createDecryptor:function(t,e){return this.create(this._DEC_XFORM_MODE,t,e)},init:function(t,e,r){this.cfg=this.cfg.extend(r),this._xformMode=t,this._key=e,this.reset()},reset:function(){o.reset.call(this),this._doReset()},process:function(t){return this._append(t),this._process()},finalize:function(t){t&&this._append(t);var e=this._doFinalize();return e},keySize:4,ivSize:4,_ENC_XFORM_MODE:1,_DEC_XFORM_MODE:2,_createHelper:function(){function t(t){return"string"==typeof t?x:m}return function(e){return{encrypt:function(r,n,i){return t(n).encrypt(e,r,n,i)},decrypt:function(r,n,i){return t(n).decrypt(e,r,n,i)}}}}()}),h=(r.StreamCipher=u.extend({_doFinalize:function(){var t=this._process(!0);return t},blockSize:1}),e.mode={}),p=r.BlockCipherMode=n.extend({createEncryptor:function(t,e){return this.Encryptor.create(t,e)},createDecryptor:function(t,e){return this.Decryptor.create(t,e)},init:function(t,e){this._cipher=t,this._iv=e}}),l=h.CBC=function(){function e(e,r,n){var i=this._iv;if(i){var o=i;this._iv=t}else var o=this._prevBlock;for(var s=0;n>s;s++)e[r+s]^=o[s]}var r=p.extend();return r.Encryptor=r.extend({processBlock:function(t,r){var n=this._cipher,i=n.blockSize;e.call(this,t,r,i),n.encryptBlock(t,r),this._prevBlock=t.slice(r,r+i)}}),r.Decryptor=r.extend({processBlock:function(t,r){var n=this._cipher,i=n.blockSize,o=t.slice(r,r+i);n.decryptBlock(t,r),e.call(this,t,r,i),this._prevBlock=o}}),r}(),d=e.pad={},v=d.Pkcs7={pad:function(t,e){for(var r=4*e,n=r-t.sigBytes%r,o=n<<24|n<<16|n<<8|n,s=[],a=0;n>a;a+=4)s.push(o);var c=i.create(s,n);t.concat(c)},unpad:function(t){var e=255&t.words[t.sigBytes-1>>>2];t.sigBytes-=e}},y=(r.BlockCipher=u.extend({cfg:u.cfg.extend({mode:l,padding:v}),reset:function(){u.reset.call(this);var t=this.cfg,e=t.iv,r=t.mode;if(this._xformMode==this._ENC_XFORM_MODE)var n=r.createEncryptor;else{var n=r.createDecryptor;this._minBufferSize=1}this._mode=n.call(r,this,e&&e.words)},_doProcessBlock:function(t,e){this._mode.processBlock(t,e)},_doFinalize:function(){var t=this.cfg.padding;if(this._xformMode==this._ENC_XFORM_MODE){t.pad(this._data,this.blockSize);var e=this._process(!0)}else{var e=this._process(!0);t.unpad(e)}return e},blockSize:4}),r.CipherParams=n.extend({init:function(t){this.mixIn(t)},toString:function(t){return(t||this.formatter).stringify(this)}})),g=e.format={},_=g.OpenSSL={stringify:function(t){var e=t.ciphertext,r=t.salt;if(r)var n=i.create([1398893684,1701076831]).concat(r).concat(e);else var n=e;return n.toString(a)},parse:function(t){var e=a.parse(t),r=e.words;if(1398893684==r[0]&&1701076831==r[1]){var n=i.create(r.slice(2,4));r.splice(0,4),e.sigBytes-=16}return y.create({ciphertext:e,salt:n})}},m=r.SerializableCipher=n.extend({cfg:n.extend({format:_}),encrypt:function(t,e,r,n){n=this.cfg.extend(n);var i=t.createEncryptor(r,n),o=i.finalize(e),s=i.cfg;return y.create({ciphertext:o,key:r,iv:s.iv,algorithm:t,mode:s.mode,padding:s.padding,blockSize:t.blockSize,formatter:n.format})},decrypt:function(t,e,r,n){n=this.cfg.extend(n),e=this._parse(e,n.format);var i=t.createDecryptor(r,n).finalize(e.ciphertext);return i},_parse:function(t,e){return"string"==typeof t?e.parse(t,this):t}}),S=e.kdf={},B=S.OpenSSL={execute:function(t,e,r,n){n||(n=i.random(8));var o=f.create({keySize:e+r}).compute(t,n),s=i.create(o.words.slice(e),4*r);return o.sigBytes=4*e,y.create({key:o,iv:s,salt:n})}},x=r.PasswordBasedCipher=m.extend({cfg:m.cfg.extend({kdf:B}),encrypt:function(t,e,r,n){n=this.cfg.extend(n);var i=n.kdf.execute(r,t.keySize,t.ivSize);n.iv=i.iv;var o=m.encrypt.call(this,t,e,i.key,n);return o.mixIn(i),o},decrypt:function(t,e,r,n){n=this.cfg.extend(n),e=this._parse(e,n.format);var i=n.kdf.execute(r,t.keySize,t.ivSize,e.salt);n.iv=i.iv;var o=m.decrypt.call(this,t,e,i.key,n);return o}})}(),function(){var t=CryptoJS,e=t.lib,r=e.BlockCipher,n=t.algo,i=[],o=[],s=[],a=[],c=[],f=[],u=[],h=[],p=[],l=[];!function(){for(var t=[],e=0;256>e;e++)t[e]=128>e?e<<1:e<<1^283;for(var r=0,n=0,e=0;256>e;e++){var d=n^n<<1^n<<2^n<<3^n<<4;d=d>>>8^255&d^99,i[r]=d,o[d]=r;var v=t[r],y=t[v],g=t[y],_=257*t[d]^16843008*d;s[r]=_<<24|_>>>8,a[r]=_<<16|_>>>16,c[r]=_<<8|_>>>24,f[r]=_;var _=16843009*g^65537*y^257*v^16843008*r;u[d]=_<<24|_>>>8,h[d]=_<<16|_>>>16,p[d]=_<<8|_>>>24,l[d]=_,r?(r=v^t[t[t[g^v]]],n^=t[t[n]]):r=n=1}}();var d=[0,1,2,4,8,16,32,64,128,27,54],v=n.AES=r.extend({_doReset:function(){for(var t=this._key,e=t.words,r=t.sigBytes/4,n=this._nRounds=r+6,o=4*(n+1),s=this._keySchedule=[],a=0;o>a;a++)if(r>a)s[a]=e[a];else{var c=s[a-1];a%r?r>6&&a%r==4&&(c=i[c>>>24]<<24|i[c>>>16&255]<<16|i[c>>>8&255]<<8|i[255&c]):(c=c<<8|c>>>24,c=i[c>>>24]<<24|i[c>>>16&255]<<16|i[c>>>8&255]<<8|i[255&c],c^=d[a/r|0]<<24),s[a]=s[a-r]^c}for(var f=this._invKeySchedule=[],v=0;o>v;v++){var a=o-v;if(v%4)var c=s[a];else var c=s[a-4];f[v]=4>v||4>=a?c:u[i[c>>>24]]^h[i[c>>>16&255]]^p[i[c>>>8&255]]^l[i[255&c]]}},encryptBlock:function(t,e){this._doCryptBlock(t,e,this._keySchedule,s,a,c,f,i)},decryptBlock:function(t,e){var r=t[e+1];t[e+1]=t[e+3],t[e+3]=r,this._doCryptBlock(t,e,this._invKeySchedule,u,h,p,l,o);var r=t[e+1];t[e+1]=t[e+3],t[e+3]=r},_doCryptBlock:function(t,e,r,n,i,o,s,a){for(var c=this._nRounds,f=t[e]^r[0],u=t[e+1]^r[1],h=t[e+2]^r[2],p=t[e+3]^r[3],l=4,d=1;c>d;d++){var v=n[f>>>24]^i[u>>>16&255]^o[h>>>8&255]^s[255&p]^r[l++],y=n[u>>>24]^i[h>>>16&255]^o[p>>>8&255]^s[255&f]^r[l++],g=n[h>>>24]^i[p>>>16&255]^o[f>>>8&255]^s[255&u]^r[l++],_=n[p>>>24]^i[f>>>16&255]^o[u>>>8&255]^s[255&h]^r[l++];f=v,u=y,h=g,p=_}var v=(a[f>>>24]<<24|a[u>>>16&255]<<16|a[h>>>8&255]<<8|a[255&p])^r[l++],y=(a[u>>>24]<<24|a[h>>>16&255]<<16|a[p>>>8&255]<<8|a[255&f])^r[l++],g=(a[h>>>24]<<24|a[p>>>16&255]<<16|a[f>>>8&255]<<8|a[255&u])^r[l++],_=(a[p>>>24]<<24|a[f>>>16&255]<<16|a[u>>>8&255]<<8|a[255&h])^r[l++];t[e]=v,t[e+1]=y,t[e+2]=g,t[e+3]=_},keySize:8});t.AES=r._createHelper(v)}();var aesCrypto={};!function(t){"use strict";t.formatter={prefix:"",stringify:function(t){var r=this.prefix;return r+=t.salt.toString(),r+=t.ciphertext.toString()},parse:function(t){var r=CryptoJS.lib.CipherParams.create({}),e=this.prefix.length;return 0!==t.indexOf(this.prefix)?r:(r.ciphertext=CryptoJS.enc.Hex.parse(t.substring(16+e)),r.salt=CryptoJS.enc.Hex.parse(t.substring(e,16+e)),r)}},t.encrypt=function(r,e){try{return CryptoJS.AES.encrypt(r,e,{format:t.formatter}).toString()}catch(n){return""}},t.decrypt=function(r,e){try{var n=CryptoJS.AES.decrypt(r,e,{format:t.formatter});return n.toString(CryptoJS.enc.Utf8)}catch(i){return""}}}(aesCrypto);
+/* ==========================================================================
+ADBLOCK PLUGIN
+========================================================================== */
+!function(t){var e=function(e){this._options={checkOnLoad:!1,resetOnEnd:!1,loopCheckTime:50,loopMaxNumber:5,baitClass:"pub_300x250 pub_300x250m pub_728x90 text-ad textAd text_ad text_ads text-ads text-ad-links",baitStyle:"width: 1px !important; height: 1px !important; position: absolute !important; left: -10000px !important; top: -1000px !important;",debug:!1},this._var={version:"3.2.1",bait:null,checking:!1,loop:null,loopNumber:0,event:{detected:[],notDetected:[]}},void 0!==e&&this.setOption(e);var i=this,o=function(){setTimeout(function(){i._options.checkOnLoad===!0&&(i._options.debug===!0&&i._log("onload->eventCallback","A check loading is launched"),null===i._var.bait&&i._creatBait(),setTimeout(function(){i.check()},1))},1)};void 0!==t.addEventListener?t.addEventListener("load",o,!1):t.attachEvent("onload",o)};e.prototype._options=null,e.prototype._var=null,e.prototype._bait=null,e.prototype._log=function(t,e){console.log("[FuckAdBlock]["+t+"] "+e)},e.prototype.setOption=function(t,e){if(void 0!==e){var i=t;t={},t[i]=e}for(var o in t)this._options[o]=t[o],this._options.debug===!0&&this._log("setOption",'The option "'+o+'" he was assigned to "'+t[o]+'"');return this},e.prototype._creatBait=function(){var e=document.createElement("div");e.setAttribute("class",this._options.baitClass),e.setAttribute("style",this._options.baitStyle),this._var.bait=t.document.body.appendChild(e),this._var.bait.offsetParent,this._var.bait.offsetHeight,this._var.bait.offsetLeft,this._var.bait.offsetTop,this._var.bait.offsetWidth,this._var.bait.clientHeight,this._var.bait.clientWidth,this._options.debug===!0&&this._log("_creatBait","Bait has been created")},e.prototype._destroyBait=function(){t.document.body.removeChild(this._var.bait),this._var.bait=null,this._options.debug===!0&&this._log("_destroyBait","Bait has been removed")},e.prototype.check=function(t){if(void 0===t&&(t=!0),this._options.debug===!0&&this._log("check","An audit was requested "+(t===!0?"with a":"without")+" loop"),this._var.checking===!0)return this._options.debug===!0&&this._log("check","A check was canceled because there is already an ongoing"),!1;this._var.checking=!0,null===this._var.bait&&this._creatBait();var e=this;return this._var.loopNumber=0,t===!0&&(this._var.loop=setInterval(function(){e._checkBait(t)},this._options.loopCheckTime)),setTimeout(function(){e._checkBait(t)},1),this._options.debug===!0&&this._log("check","A check is in progress ..."),!0},e.prototype._checkBait=function(e){var i=!1;if(null===this._var.bait&&this._creatBait(),(null!==t.document.body.getAttribute("abp")||null===this._var.bait.offsetParent||0==this._var.bait.offsetHeight||0==this._var.bait.offsetLeft||0==this._var.bait.offsetTop||0==this._var.bait.offsetWidth||0==this._var.bait.clientHeight||0==this._var.bait.clientWidth)&&(i=!0),void 0!==t.getComputedStyle){var o=t.getComputedStyle(this._var.bait,null);!o||"none"!=o.getPropertyValue("display")&&"hidden"!=o.getPropertyValue("visibility")||(i=!0)}this._options.debug===!0&&this._log("_checkBait","A check ("+(this._var.loopNumber+1)+"/"+this._options.loopMaxNumber+" ~"+(1+this._var.loopNumber*this._options.loopCheckTime)+"ms) was conducted and detection is "+(i===!0?"positive":"negative")),e===!0&&(this._var.loopNumber++,this._var.loopNumber>=this._options.loopMaxNumber&&this._stopLoop()),i===!0?(this._stopLoop(),this._destroyBait(),this.emitEvent(!0),e===!0&&(this._var.checking=!1)):(null===this._var.loop||e===!1)&&(this._destroyBait(),this.emitEvent(!1),e===!0&&(this._var.checking=!1))},e.prototype._stopLoop=function(t){clearInterval(this._var.loop),this._var.loop=null,this._var.loopNumber=0,this._options.debug===!0&&this._log("_stopLoop","A loop has been stopped")},e.prototype.emitEvent=function(t){this._options.debug===!0&&this._log("emitEvent","An event with a "+(t===!0?"positive":"negative")+" detection was called");var e=this._var.event[t===!0?"detected":"notDetected"];for(var i in e)this._options.debug===!0&&this._log("emitEvent","Call function "+(parseInt(i)+1)+"/"+e.length),e.hasOwnProperty(i)&&e[i]();return this._options.resetOnEnd===!0&&this.clearEvent(),this},e.prototype.clearEvent=function(){this._var.event.detected=[],this._var.event.notDetected=[],this._options.debug===!0&&this._log("clearEvent","The event list has been cleared")},e.prototype.on=function(t,e){return this._var.event[t===!0?"detected":"notDetected"].push(e),this._options.debug===!0&&this._log("on",'A type of event "'+(t===!0?"detected":"notDetected")+'" was added'),this},e.prototype.onDetected=function(t){return this.on(!0,t)},e.prototype.onNotDetected=function(t){return this.on(!1,t)},t.FuckAdBlock=e,void 0===t.fuckAdBlock&&(t.fuckAdBlock=new e({checkOnLoad:!0,resetOnEnd:!0}))}(window);
+//]]>
+</script>
+
+</b:if>		
+
+</body>
+</html>
